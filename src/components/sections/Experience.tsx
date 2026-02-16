@@ -1,38 +1,46 @@
-import { Calendar, CheckCircle } from 'lucide-react';
 import { experience } from '../../data/experience';
 
 export const Experience = () => {
   return (
-    <section id="experience" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-sienna-700 mb-4">Professional Journey</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            A decade of progressive growth in technical project management
+    <section id="experience" className="py-32 bg-white px-12">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-16">
+          <p className="text-eyebrow font-medium tracking-wide uppercase text-light-muted mb-2">
+            Experience
           </p>
+          <h2 className="text-heading-xl font-semibold text-black">
+            Professional Journey
+          </h2>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 max-w-4xl">
           {experience.map((job, index) => (
-            <div key={index} className="bg-warmNeutral-50 p-8 rounded-xl shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                <div>
-                  <h3 className="text-xl font-bold text-sienna-700 mb-1">{job.role}</h3>
-                  <p className="text-coral-600 font-medium">{job.company}</p>
+            <div key={index}>
+              <div className="flex gap-8">
+                {/* Date column */}
+                <div className="w-48 flex-shrink-0">
+                  <p className="text-caption font-normal text-light-muted">
+                    {job.year}
+                  </p>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 mt-2 md:mt-0">
-                  <Calendar className="w-5 h-5" />
-                  <span className="font-medium">{job.year}</span>
-                </div>
-              </div>
 
-              <div className="space-y-3">
-                {job.achievements.map((achievement, achIndex) => (
-                  <div key={achIndex} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-coral-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-gray-600">{achievement}</p>
-                  </div>
-                ))}
+                {/* Content column */}
+                <div className="flex-1 pb-8 border-b border-surface">
+                  <h3 className="text-heading-sm font-semibold text-black mb-1">
+                    {job.role}
+                  </h3>
+                  <p className="text-caption font-normal text-light-muted mb-4">
+                    {job.company}
+                  </p>
+
+                  <ul className="space-y-2">
+                    {job.achievements.map((achievement, achIndex) => (
+                      <li key={achIndex} className="text-caption font-normal text-muted-text">
+                        • {achievement}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           ))}

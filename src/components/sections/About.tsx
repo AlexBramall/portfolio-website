@@ -1,5 +1,3 @@
-import { TrendingUp, Users, CheckCircle } from 'lucide-react';
-
 const highlights = [
   "Certified PMP and Scrum Master with advanced certifications",
   "Expert in Agile, Waterfall, and hybrid project methodologies",
@@ -9,54 +7,52 @@ const highlights = [
 
 export const About = () => {
   return (
-    <section id="about" className="py-20 bg-warmNeutral-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-sienna-700 mb-4">About Me</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Passionate about bridging the gap between technology and business objectives
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+    <section id="about" className="py-32 bg-surface px-12">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
+          {/* Photo */}
+          <div className="flex-shrink-0">
             <img
               src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
-              alt="Team collaboration"
-              className="rounded-lg shadow-xl"
+              alt="Alex Bramall"
+              className="w-80 h-[400px] rounded-2xl object-cover"
             />
           </div>
-          <div>
-            <h3 className="text-2xl font-bold text-sienna-700 mb-6">Leadership Philosophy</h3>
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              I believe in empowering teams to achieve extraordinary results through clear communication,
-              strategic thinking, and adaptive leadership. My approach combines technical expertise with
-              human-centered management to deliver solutions that exceed expectations.
-            </p>
 
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              <div className="text-center">
-                <div className="bg-sienna-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                  <TrendingUp className="w-8 h-8 text-sienna-600" />
-                </div>
-                <h4 className="font-semibold text-sienna-700">50+ Projects</h4>
-                <p className="text-sm text-gray-600">Successfully delivered</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-coral-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                  <Users className="w-8 h-8 text-coral-600" />
-                </div>
-                <h4 className="font-semibold text-sienna-700">100+ Team Members</h4>
-                <p className="text-sm text-gray-600">Led and mentored</p>
-              </div>
+          {/* Content */}
+          <div className="flex-1">
+            <div className="mb-12">
+              <p className="text-eyebrow font-medium tracking-wide uppercase text-light-muted mb-2">
+                About Me
+              </p>
+              <h2 className="text-heading-xl font-semibold text-black mb-6">
+                Leadership Philosophy
+              </h2>
+              <p className="text-body font-normal text-muted-text leading-relaxed max-w-[500px] mb-8">
+                I believe in empowering teams to achieve extraordinary results through clear communication,
+                strategic thinking, and adaptive leadership. My approach combines technical expertise with
+                human-centered management to deliver solutions that exceed expectations.
+              </p>
             </div>
 
-            <div className="space-y-3">
+            {/* Credentials */}
+            <div className="flex flex-wrap gap-2 mb-8">
               {highlights.map((item, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-coral-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-gray-600">{item}</p>
-                </div>
+                <span
+                  key={index}
+                  className="border border-button-border rounded-full px-4 py-1.5 text-tag font-medium text-muted-text"
+                >
+                  {item.split(' ')[0]} {item.split(' ')[1]}
+                </span>
+              ))}
+            </div>
+
+            {/* Highlights */}
+            <div className="space-y-4">
+              {highlights.map((item, index) => (
+                <p key={index} className="text-caption font-normal text-muted-text">
+                  • {item}
+                </p>
               ))}
             </div>
           </div>

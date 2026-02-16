@@ -2,24 +2,28 @@ import { SectionId } from '../../types';
 
 interface MobileMenuProps {
   isOpen: boolean;
+  sections: { id: SectionId; label: string }[];
+  activeSection: SectionId;
   onNavigate: (section: SectionId) => void;
 }
 
-const sections: SectionId[] = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
-
-export const MobileMenu = ({ isOpen, onNavigate }: MobileMenuProps) => {
+export const MobileMenu = ({ isOpen, sections, activeSection, onNavigate }: MobileMenuProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden bg-white border-t border-gray-200">
-      <div className="px-2 pt-2 pb-3 space-y-1">
+    <div className="md:hidden bg-white border-t border-black/[0.06]">
+      <div className="px-6 py-4 space-y-2">
         {sections.map((section) => (
           <button
-            key={section}
-            onClick={() => onNavigate(section)}
-            className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-coral-600 capitalize w-full text-left"
+            key={section.id}
+            onClick={() => onNavigate(section.id)}
+            className={`block px-4 py-2 text-body font-medium w-full text-left rounded-full transition-colors duration-150 ${
+              activeSection === section.id
+                ? 'bg-black text-white'
+                : 'text-muted-text hover:text-black'
+            }`}
           >
-            {section}
+            {section.label}
           </button>
         ))}
       </div>
