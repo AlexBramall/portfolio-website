@@ -20,9 +20,10 @@ export const Contact = () => {
             <p className="text-gray-600 mb-4">Drop me a line anytime</p>
             <a
               href="mailto:alex.Bramall@email.com"
-              className="text-emerald-600 font-medium hover:text-emerald-700 transition-colors"
+              className="bg-[#48A111] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#3a810d] transition-colors duration-200 inline-flex items-center gap-2"
             >
-              alex.Bramall@email.com
+              Get In Touch
+              <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 

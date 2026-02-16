@@ -36,7 +36,7 @@ export const Hero = ({ onNavigate }: HeroProps) => {
             </button>
             <button
               onClick={() => onNavigate('contact')}
-              className="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors duration-200 flex items-center justify-center gap-2"
+              className="bg-[#48A111] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#3a810d] transition-colors duration-200 flex items-center justify-center gap-2"
             >
               Get In Touch
               <Mail className="w-4 h-4" />
