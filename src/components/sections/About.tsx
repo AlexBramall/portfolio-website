@@ -9,10 +9,10 @@ const highlights = [
 
 export const About = () => {
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 bg-warmNeutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-slate-800 mb-4">About Me</h2>
+          <h2 className="text-4xl font-bold text-sienna-700 mb-4">About Me</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Passionate about bridging the gap between technology and business objectives
           </p>
@@ -27,7 +27,7 @@ export const About = () => {
             />
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-6">Leadership Philosophy</h3>
+            <h3 className="text-2xl font-bold text-sienna-700 mb-6">Leadership Philosophy</h3>
             <p className="text-gray-600 mb-6 leading-relaxed">
               I believe in empowering teams to achieve extraordinary results through clear communication,
               strategic thinking, and adaptive leadership. My approach combines technical expertise with
@@ -36,17 +36,17 @@ export const About = () => {
 
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="text-center">
-                <div className="bg-emerald-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                  <TrendingUp className="w-8 h-8 text-emerald-600" />
+                <div className="bg-sienna-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                  <TrendingUp className="w-8 h-8 text-sienna-600" />
                 </div>
-                <h4 className="font-semibold text-slate-800">50+ Projects</h4>
+                <h4 className="font-semibold text-sienna-700">50+ Projects</h4>
                 <p className="text-sm text-gray-600">Successfully delivered</p>
               </div>
               <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                  <Users className="w-8 h-8 text-blue-600" />
+                <div className="bg-coral-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                  <Users className="w-8 h-8 text-coral-600" />
                 </div>
-                <h4 className="font-semibold text-slate-800">100+ Team Members</h4>
+                <h4 className="font-semibold text-sienna-700">100+ Team Members</h4>
                 <p className="text-sm text-gray-600">Led and mentored</p>
               </div>
             </div>
@@ -54,7 +54,7 @@ export const About = () => {
             <div className="space-y-3">
               {highlights.map((item, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-coral-600 flex-shrink-0 mt-0.5" />
                   <p className="text-gray-600">{item}</p>
                 </div>
               ))}

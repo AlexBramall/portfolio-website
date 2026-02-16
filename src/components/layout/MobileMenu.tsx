@@ -17,7 +17,7 @@ export const MobileMenu = ({ isOpen, onNavigate }: MobileMenuProps) => {
           <button
             key={section}
             onClick={() => onNavigate(section)}
-            className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-red-600 capitalize w-full text-left"
+            className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-coral-600 capitalize w-full text-left"
           >
             {section}
           </button>
