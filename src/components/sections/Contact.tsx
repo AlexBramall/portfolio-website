@@ -32,7 +32,8 @@ export const Contact = () => {
               href="mailto:alex.Bramall@email.com"
               className="text-caption font-normal text-light-muted hover:text-white transition-colors"
             >
-              alex.Bramall@email.com
+              Get In Touch
+              <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 
