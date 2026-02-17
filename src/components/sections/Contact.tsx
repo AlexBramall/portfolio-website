@@ -2,9 +2,9 @@ import { MapPin, ArrowRight } from 'lucide-react';
 
 export const Contact = () => {
   return (
-    <section id="contact" className="py-32 bg-black text-white">
-      <div className="max-w-6xl mx-auto px-12">
-        <div className="text-center mb-8">
+    <section id="contact" className="py-10 sm:py-24 bg-black text-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="text-center mb-6">
           <h2 className="text-heading-xl font-bold mb-4">
             Let's Connect
           </h2>
@@ -28,7 +28,6 @@ export const Contact = () => {
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#48A111] text-white rounded-full text-label font-medium hover:bg-[#3a810d] transition-colors duration-200"
           >
             Get In Touch
-            <ArrowRight className="w-4 h-4" />
           </a>
         </div>
       </div>

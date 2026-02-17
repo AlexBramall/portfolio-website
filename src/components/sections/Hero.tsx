@@ -9,7 +9,7 @@ export const Hero = ({ onNavigate }: HeroProps) => {
   return (
     <section 
       id="home" 
-      className="min-h-[80vh] flex flex-col items-center justify-center bg-white pt-16 px-12"
+      className="min-h-[80vh] flex flex-col items-center justify-center bg-white pt-16 px-4 sm:px-6 md:px-12"
     >
       <div className="text-center flex flex-col items-center">
         <h1 className="text-display-xl font-bold text-black mb-4 leading-tight">

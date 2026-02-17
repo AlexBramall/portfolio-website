@@ -7,15 +7,15 @@ const highlights = [
 
 export const About = () => {
   return (
-    <section id="about" className="py-32 bg-surface px-12">
+    <section id="about" className="py-10 sm:py-24 bg-surface px-4 sm:px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-16 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
           {/* Photo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 w-full lg:w-auto">
             <img
               src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
               alt="Alex Bramall"
-              className="w-80 h-[400px] rounded-2xl object-cover"
+              className="w-full sm:w-80 h-[300px] sm:h-[400px] rounded-2xl object-cover"
             />
           </div>
 
