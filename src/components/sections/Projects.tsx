@@ -11,11 +11,17 @@ export const Projects = () => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const scrollAmount = 400;
+    const cards = container.children;
+    if (!cards.length) return;
+
+    const cardWidth = (cards[0] as HTMLElement).offsetWidth;
+    const gap = 24; // gap-6 = 24px
+    const scrollUnit = cardWidth + gap;
+
     if (direction === 'left') {
-      container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      container.scrollBy({ left: -scrollUnit, behavior: 'smooth' });
     } else {
-      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      container.scrollBy({ left: scrollUnit, behavior: 'smooth' });
     }
   };
 
@@ -43,9 +49,9 @@ export const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-32 bg-surface px-12">
+    <section id="projects" className="py-10 sm:py-24 bg-surface px-4 sm:px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-8 sm:mb-12">
           <p className="text-eyebrow font-medium tracking-wide uppercase text-light-muted mb-2">
             Work
           </p>
@@ -58,9 +64,8 @@ export const Projects = () => {
           {/* Carousel Container */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth"
+            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory"
             style={{
-              scrollBehavior: 'smooth',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
             }}
@@ -68,7 +73,7 @@ export const Projects = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-80"
+                className="flex-shrink-0 w-[calc(100vw-4rem)] sm:w-80 snap-center"
               >
                 <div className="bg-white rounded-2xl overflow-hidden h-full flex flex-col">
                   {/* Image Area */}

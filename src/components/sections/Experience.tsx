@@ -2,9 +2,9 @@ import { experience } from '../../data/experience';
 
 export const Experience = () => {
   return (
-    <section id="experience" className="py-32 bg-white px-12">
+    <section id="experience" className="py-10 sm:py-24 bg-white px-4 sm:px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-8 sm:mb-12">
           <p className="text-eyebrow font-medium tracking-wide uppercase text-light-muted mb-2">
             Experience
           </p>
@@ -16,9 +16,9 @@ export const Experience = () => {
         <div className="space-y-8 max-w-4xl">
           {experience.map((job, index) => (
             <div key={index}>
-              <div className="flex gap-8">
+              <div className="flex flex-col sm:flex-row sm:gap-8">
                 {/* Date column */}
-                <div className="w-48 flex-shrink-0">
+                <div className="sm:w-48 sm:flex-shrink-0 mb-1 sm:mb-0">
                   <p className="text-caption font-normal text-light-muted">
                     {job.year}
                   </p>
