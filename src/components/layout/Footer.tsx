@@ -8,7 +8,7 @@ export const Footer = () => {
           {/* Left: Name and title */}
           <div>
             <h3 className="text-body font-semibold">Alex Bramall</h3>
-            <p className="text-caption font-normal text-light-muted">Technical Project Manager</p>
+            <p className="text-caption font-normal text-light-muted">Technical Program Manager</p>
           </div>
 
           {/* Center: Social icons */}
