@@ -54,7 +54,7 @@ export const Contact = () => {
           <div className="flex items-center gap-3">
             <MapPin className="w-5 h-5 flex-shrink-0" />
             <span className="text-caption font-normal text-light-muted">
-              San Francisco, CA
+              Austin, Texas
             </span>
           </div>
         </div>

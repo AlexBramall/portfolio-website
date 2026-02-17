@@ -38,7 +38,7 @@ export const Footer = () => {
 
           {/* Right: Copyright */}
           <div className="text-caption font-normal text-light-muted">
-            &copy; 2024 Alex Bramall
+            &copy; {new Date().getFullYear()} Alex Bramall
           </div>
         </div>
       </div>
