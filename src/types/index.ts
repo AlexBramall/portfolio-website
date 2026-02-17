@@ -20,4 +20,10 @@ export interface Experience {
   achievements: string[];
 }
 
+export interface Competency {
+  category: string;
+  name: string;
+  description: string;
+}
+
 export type SectionId = 'home' | 'about' | 'skills' | 'projects' | 'experience' | 'contact';

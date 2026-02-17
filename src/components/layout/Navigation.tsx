@@ -16,8 +16,8 @@ export const Navigation = ({ activeSection, onNavigate }: NavigationProps) => {
           onClick={() => onNavigate(section)}
           className={`capitalize transition-colors duration-200 ${
             activeSection === section
-              ? 'text-red-600 font-medium'
-              : 'text-gray-600 hover:text-red-600'
+              ? 'text-coral-600 font-medium'
+              : 'text-gray-600 hover:text-coral-600'
           }`}
         >
           {section}

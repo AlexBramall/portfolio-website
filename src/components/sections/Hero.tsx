@@ -7,45 +7,43 @@ interface HeroProps {
 
 export const Hero = ({ onNavigate }: HeroProps) => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-emerald-50 pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="mb-8">
-          <img
-            src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop"
-            alt="Alex Bramall"
-            className="w-32 h-32 rounded-full mx-auto mb-6 object-cover shadow-xl"
-          />
-          <h1 className="text-5xl md:text-6xl font-bold text-slate-800 mb-4">
-            Alex Bramall
-          </h1>
-          <p className="text-2xl md:text-3xl text-slate-600 mb-8">
-            Technical Project Manager
-          </p>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Transforming complex technical challenges into successful outcomes.
-            With 10+ years of experience leading cross-functional teams and delivering
-            enterprise-scale solutions that drive business value.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => onNavigate('projects')}
-              className="bg-red-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200 flex items-center justify-center gap-2"
-            >
-              View My Work
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => onNavigate('contact')}
-              className="bg-[#48A111] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#3a810d] transition-colors duration-200 flex items-center justify-center gap-2"
-            >
-              Get In Touch
-              <Mail className="w-4 h-4" />
-            </button>
-          </div>
+    <section 
+      id="home" 
+      className="min-h-[80vh] flex flex-col items-center justify-center bg-white pt-16 px-12"
+    >
+      <div className="text-center flex flex-col items-center">
+        <h1 className="text-display-xl font-bold text-black mb-4 leading-tight">
+          Alex Bramall
+        </h1>
+        <p className="text-display-lg font-normal text-muted-text mb-6 tracking-normal">
+          Technical Project Manager
+        </p>
+        <p className="text-body font-normal text-muted-text max-w-[480px] mb-12 leading-relaxed">
+          Transforming complex technical challenges into successful outcomes.
+          With 10+ years of experience leading cross-functional teams and delivering
+          enterprise-scale solutions.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <button
+            onClick={() => onNavigate('projects')}
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-black text-white rounded-full text-label font-medium hover:bg-dark-gray transition-colors duration-200"
+          >
+            View My Work
+            <ArrowRight className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => onNavigate('contact')}
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#48A111] text-white rounded-full text-label font-medium hover:bg-[#3a810d] transition-colors duration-200"
+          >
+            Get In Touch
+            <Mail className="w-4 h-4" />
+          </button>
         </div>
+
         <div className="animate-bounce">
           <ChevronDown
-            className="w-8 h-8 text-gray-400 mx-auto cursor-pointer"
+            className="w-6 h-6 text-light-muted cursor-pointer"
             onClick={() => onNavigate('about')}
           />
         </div>

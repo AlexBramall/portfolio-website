@@ -1,16 +1,12 @@
-export interface SkillData {
-  name: string;
-  level: number;
-  iconName: string;
-}
+import { Competency } from '../types';
 
-export const skillsData: SkillData[] = [
-  { name: "Project Management", level: 95, iconName: "Target" },
-  { name: "Agile/Scrum", level: 90, iconName: "Zap" },
-  { name: "Technical Architecture", level: 85, iconName: "Code" },
-  { name: "Cloud Platforms", level: 88, iconName: "Globe" },
-  { name: "Team Leadership", level: 92, iconName: "Users" },
-  { name: "Stakeholder Management", level: 94, iconName: "Briefcase" },
-  { name: "Data Analytics", level: 80, iconName: "Database" },
-  { name: "Risk Management", level: 87, iconName: "Award" }
+export const skillsData: Competency[] = [
+  { category: 'Leadership', name: 'Team Leadership', description: 'Building and mentoring high-performing teams' },
+  { category: 'Leadership', name: 'Stakeholder Management', description: 'Managing complex stakeholder relationships' },
+  { category: 'Strategy', name: 'Project Management', description: 'End-to-end project planning and execution' },
+  { category: 'Strategy', name: 'Agile/Scrum', description: 'Agile methodology and sprint management' },
+  { category: 'Technical', name: 'Technical Architecture', description: 'Designing scalable system architectures' },
+  { category: 'Technical', name: 'Cloud Platforms', description: 'AWS, GCP, and cloud infrastructure' },
+  { category: 'Analytics', name: 'Data Analytics', description: 'Data-driven decision making and insights' },
+  { category: 'Risk', name: 'Risk Management', description: 'Identifying and mitigating business risks' },
 ];

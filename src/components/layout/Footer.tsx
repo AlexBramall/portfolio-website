@@ -2,29 +2,44 @@ import { Mail, Linkedin, Github } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-800 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <h3 className="text-2xl font-bold mb-2">Alex Bramall</h3>
-            <p className="text-gray-400">Technical Project Manager</p>
+    <footer className="bg-neutral-900 text-white py-8">
+      <div className="max-w-6xl mx-auto px-12">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          {/* Left: Name and title */}
+          <div>
+            <h3 className="text-body font-semibold">Alex Bramall</h3>
+            <p className="text-caption font-normal text-light-muted">Technical Project Manager</p>
           </div>
 
-          <div className="flex space-x-6">
-            <a href="mailto:alex.Bramall@email.com" className="text-gray-400 hover:text-white transition-colors">
-              <Mail className="w-6 h-6" />
+          {/* Center: Social icons */}
+          <div className="flex gap-4">
+            <a 
+              href="mailto:alex.Bramall@email.com" 
+              className="text-light-muted hover:text-white transition-colors duration-150"
+              aria-label="Email"
+            >
+              <Mail className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com/in/alexBramall" className="text-gray-400 hover:text-white transition-colors">
-              <Linkedin className="w-6 h-6" />
+            <a 
+              href="https://linkedin.com/in/alexBramall" 
+              className="text-light-muted hover:text-white transition-colors duration-150"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://github.com/alexBramall" className="text-gray-400 hover:text-white transition-colors">
-              <Github className="w-6 h-6" />
+            <a 
+              href="https://github.com/alexBramall" 
+              className="text-light-muted hover:text-white transition-colors duration-150"
+              aria-label="GitHub"
+            >
+              <Github className="w-5 h-5" />
             </a>
           </div>
-        </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-          <p>&copy; 2024 Alex Bramall. All rights reserved.</p>
+          {/* Right: Copyright */}
+          <div className="text-caption font-normal text-light-muted">
+            &copy; 2024 Alex Bramall
+          </div>
         </div>
       </div>
     </footer>
