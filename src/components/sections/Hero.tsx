@@ -16,7 +16,7 @@ export const Hero = ({ onNavigate }: HeroProps) => {
           Alex Bramall
         </h1>
         <p className="text-display-lg font-normal text-muted-text mb-6 tracking-normal">
-          Technical Project Manager
+          Technical Program Manager 
         </p>
         <p className="text-body font-normal text-muted-text max-w-[480px] mb-12 leading-relaxed">
           Transforming complex technical challenges into successful outcomes.
