@@ -2,7 +2,7 @@ import { placeholder } from '../lib/placeholder';
 
 export const copy = {
   hero: {
-    roleLine: placeholder('hero.role_line'),
+    roleLine: 'AI-Native Program & Product Leader',
     valueProp: placeholder('hero.value_prop'),
     availability: placeholder('hero.availability'),
   },
