@@ -48,7 +48,7 @@ Pass means all of:
 - `state.json` exists and its `pid` is alive
 - that process command line contains `vite`
 - `GET <url>` is 2xx and the HTML title is `Alex Bramall | Technical Program Manager`
-- Chrome actually mounted the SPA: `nav` is present, `#home h1` exists, and home sections `home selected-work how-i-work stack hire` exist. `#proof` is optional (hidden when chips have no values).
+- Chrome actually mounted the SPA: `nav` is present, `#home h1` exists, and home sections `home selected-work how-i-work stack contact-strip` exist. `#proof` is optional (hidden when chips have no values). No `#hire` section and no `Hire` link.
 
 Exit `1` if any check fails. Do not drive a failing instance — cleanup, relaunch, doctor again.
 
@@ -75,12 +75,12 @@ Stable handles from this repo (prefer these over CSS/coordinates):
 | --- | --- |
 | Wordmark | `link` named `Alex Bramall` (home) |
 | Desktop / mobile nav | `link` named `Work`, `About`, `Contact` |
-| Nav / hero primary CTA | `link` named `Hire` (goes to `/contact`) |
+| Nav / hero primary CTA | `link` named `Contact` (goes to `/contact`) |
 | Hero secondary CTA | `#home a` whose accessible name is `Work` (goes to `/work`) |
 | Selected-work cards | `link` whose `href` contains `/work/<slug>` |
 | Footer | `link` named `Email`, `LinkedIn`, `GitHub` |
 | Contact mailto | `link` named `Email` |
-| Home sections | `#home` `#selected-work` `#how-i-work` `#stack` `#hire` |
+| Home sections | `#home` `#selected-work` `#how-i-work` `#stack` `#contact-strip` |
 | Routes | `#work` `#about` `#contact` plus `/work/:slug` case template |
 
 Smooth in-page scroll is async. After a hash jump, `wait-for --selector "#<id>"` until that section is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. After a **route** click, wait-for the destination landmark the same way (`#work`, `#about`, `#contact`, or the case `h1`). Snapshots mark `[in-view]` on nodes that currently intersect the viewport — use that, not mere presence, as proof.

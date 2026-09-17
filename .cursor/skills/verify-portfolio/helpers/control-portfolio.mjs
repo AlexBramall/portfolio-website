@@ -570,6 +570,7 @@ async function cmdDoctor() {
           wordmark: document.querySelector('nav a')?.textContent?.trim() || '',
           sections: [...document.querySelectorAll('section[id]')].map((el) => el.id),
           workNav: [...document.querySelectorAll('a')].some((el) => el.textContent.trim() === 'Work'),
+          contactNav: [...document.querySelectorAll('a')].some((el) => el.textContent.trim() === 'Contact'),
           hireNav: [...document.querySelectorAll('a')].some((el) => el.textContent.trim() === 'Hire')
         })`,
       );
@@ -578,11 +579,13 @@ async function cmdDoctor() {
         Boolean(probe.h1) &&
         probe.wordmark === 'Alex Bramall' &&
         probe.workNav === true &&
-        probe.hireNav === true &&
+        probe.contactNav === true &&
+        probe.hireNav === false &&
         Array.isArray(probe.sections) &&
-        ['home', 'selected-work', 'how-i-work', 'stack', 'hire'].every((id) =>
+        ['home', 'selected-work', 'how-i-work', 'stack', 'contact-strip'].every((id) =>
           probe.sections.includes(id),
-        );
+        ) &&
+        !probe.sections.includes('hire');
       result.checks.push({
         name: 'spa-rendered',
         ok: renderOk,

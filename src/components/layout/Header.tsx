@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
-import { buttonClassName } from '../../lib/buttonStyles';
 
 const navItems = [
   { to: '/work', label: 'Work' },
@@ -42,9 +41,6 @@ export const Header = () => {
               {item.label}
             </NavLink>
           ))}
-          <Link to="/contact" className={buttonClassName('primary')}>
-            Hire
-          </Link>
         </div>
 
         <button
@@ -76,13 +72,6 @@ export const Header = () => {
                 {item.label}
               </NavLink>
             ))}
-            <Link
-              to="/contact"
-              onClick={closeMenu}
-              className={`${buttonClassName('primary')} mt-3 w-full`}
-            >
-              Hire
-            </Link>
           </div>
         </div>
       ) : null}
