@@ -1,17 +1,6 @@
 import { skillsData } from '../../data/skills';
 
 export const Skills = () => {
-  // Group competencies by category
-  const grouped = skillsData.reduce((acc, item) => {
-    const existing = acc.find(group => group.category === item.category);
-    if (existing) {
-      existing.items.push(item);
-    } else {
-      acc.push({ category: item.category, items: [item] });
-    }
-    return acc;
-  }, [] as Array<{ category: string; items: typeof skillsData }>);
-
   return (
     <section id="skills" className="py-10 sm:py-24 bg-white px-4 sm:px-6 md:px-12">
       <div className="max-w-6xl mx-auto">

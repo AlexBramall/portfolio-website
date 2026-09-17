@@ -1,4 +1,4 @@
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export const Contact = () => {
   return (

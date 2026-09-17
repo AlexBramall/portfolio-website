@@ -49,7 +49,15 @@ const AppContent = Sentry.withProfiler(() => {
 // Wrap the entire app with Sentry's error boundary
 const App = () => {
   return (
-    <Sentry.ErrorBoundary fallback={ErrorFallback} showDialog>
+    <Sentry.ErrorBoundary
+      fallback={({ error, resetError }) => (
+        <ErrorFallback
+          error={error instanceof Error ? error : new Error(String(error))}
+          resetError={resetError}
+        />
+      )}
+      showDialog
+    >
       <AppContent />
     </Sentry.ErrorBoundary>
   );
