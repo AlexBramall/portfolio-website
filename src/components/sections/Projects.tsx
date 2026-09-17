@@ -1,55 +1,25 @@
 import { projects } from '../../data/projects';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { Project } from '../../types';
+
+const impactMetric = (metrics: Project['metrics']) => {
+  if (metrics.savings) {
+    return { value: metrics.savings, label: 'Impact' };
+  }
+  if (metrics.users) {
+    return { value: metrics.users, label: 'Impact' };
+  }
+  if (metrics.efficiency) {
+    return { value: metrics.efficiency, label: 'Impact' };
+  }
+  if (metrics.satisfaction) {
+    return { value: metrics.satisfaction, label: 'Impact' };
+  }
+  return { value: '—', label: 'Impact' };
+};
 
 export const Projects = () => {
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (direction: 'left' | 'right') => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const cards = container.children;
-    if (!cards.length) return;
-
-    const cardWidth = (cards[0] as HTMLElement).offsetWidth;
-    const gap = 24; // gap-6 = 24px
-    const scrollUnit = cardWidth + gap;
-
-    if (direction === 'left') {
-      container.scrollBy({ left: -scrollUnit, behavior: 'smooth' });
-    } else {
-      container.scrollBy({ left: scrollUnit, behavior: 'smooth' });
-    }
-  };
-
-  const handleScrollCheck = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    setCanScrollLeft(container.scrollLeft > 0);
-    setCanScrollRight(
-      container.scrollLeft + container.clientWidth < container.scrollWidth - 10
-    );
-  };
-
-  useEffect(() => {
-    handleScrollCheck();
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener('scroll', handleScrollCheck);
-      window.addEventListener('resize', handleScrollCheck);
-      return () => {
-        container.removeEventListener('scroll', handleScrollCheck);
-        window.removeEventListener('resize', handleScrollCheck);
-      };
-    }
-  }, []);
-
   return (
-    <section id="projects" className="py-10 sm:py-24 bg-surface px-4 sm:px-6 md:px-12">
+    <section id="projects" className="py-32 md:py-40 bg-surface px-4 sm:px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8 sm:mb-12">
           <p className="text-eyebrow font-medium tracking-wide uppercase text-light-muted mb-2">
@@ -60,111 +30,70 @@ export const Projects = () => {
           </h2>
         </div>
 
-        <div className="relative">
-          {/* Carousel Container */}
-          <div
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-            }}
-          >
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-[calc(100vw-4rem)] sm:w-80 snap-center"
+        <div className="flex flex-col gap-8 max-w-4xl mx-auto">
+          {projects.map((project) => {
+            const impact = impactMetric(project.metrics);
+
+            return (
+              <article
+                key={project.title}
+                className="bg-white rounded-2xl overflow-hidden"
               >
-                <div className="bg-white rounded-2xl overflow-hidden h-full flex flex-col">
-                  {/* Image Area */}
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full aspect-[10/7] object-cover bg-neutral-300"
-                  />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full aspect-video object-cover bg-neutral-200"
+                />
 
-                  {/* Content Area */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-heading-sm font-semibold text-black mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-caption font-normal text-muted-text mb-4 line-clamp-2 flex-grow">
-                      {project.description}
-                    </p>
+                <div className="p-8">
+                  <h3 className="text-heading-lg font-semibold text-black mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-body-sm font-normal text-muted-text mb-4">
+                    {project.description}
+                  </p>
 
-                    {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {project.technologies.slice(0, 2).map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="bg-surface rounded-full px-2 py-0.5 text-tag font-medium text-muted-text text-xs"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="bg-surface rounded-full px-[12px] py-[4px] text-[12px] font-medium text-muted-text"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 pt-8 border-t border-surface text-center">
+                    <div>
+                      <p className="text-heading-lg font-bold text-black">
+                        {project.metrics.timeline}
+                      </p>
+                      <p className="text-eyebrow font-medium tracking-widest uppercase text-light-muted">
+                        Timeline
+                      </p>
                     </div>
-
-                    {/* Metrics */}
-                    <div className="grid grid-cols-3 gap-3 pt-3 border-t border-neutral-200 text-center">
-                      <div>
-                        <p className="text-label font-bold text-black text-sm">
-                          {project.metrics.timeline}
-                        </p>
-                        <p className="text-xs font-medium tracking-wide uppercase text-light-muted">
-                          Timeline
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-label font-bold text-black text-sm">
-                          {project.metrics.team}
-                        </p>
-                        <p className="text-xs font-medium tracking-wide uppercase text-light-muted">
-                          Team
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-label font-bold text-black text-sm">
-                          {project.metrics.savings || project.metrics.users || project.metrics.efficiency || project.metrics.satisfaction || '—'}
-                        </p>
-                        <p className="text-xs font-medium tracking-wide uppercase text-light-muted">
-                          Impact
-                        </p>
-                      </div>
+                    <div>
+                      <p className="text-heading-lg font-bold text-black">
+                        {project.metrics.team}
+                      </p>
+                      <p className="text-eyebrow font-medium tracking-widest uppercase text-light-muted">
+                        Team
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-heading-lg font-bold text-black">
+                        {impact.value}
+                      </p>
+                      <p className="text-eyebrow font-medium tracking-widest uppercase text-light-muted">
+                        {impact.label}
+                      </p>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation Arrows - Below Carousel */}
-          <div className="flex justify-center gap-4 mt-8">
-            <button
-              onClick={() => handleScroll('left')}
-              disabled={!canScrollLeft}
-              className={`p-1 rounded-full transition-colors duration-150 ${
-                canScrollLeft
-                  ? 'bg-neutral-200 text-black hover:bg-neutral-300'
-                  : 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
-              }`}
-              aria-label="Previous projects"
-            >
-              <ChevronLeft className="w-3 h-3" />
-            </button>
-
-            <button
-              onClick={() => handleScroll('right')}
-              disabled={!canScrollRight}
-              className={`p-1 rounded-full transition-colors duration-150 ${
-                canScrollRight
-                  ? 'bg-neutral-200 text-black hover:bg-neutral-300'
-                  : 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
-              }`}
-              aria-label="Next projects"
-            >
-              <ChevronRight className="w-3 h-3" />
-            </button>
-          </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
