@@ -33,4 +33,4 @@ Preconditions:
 
 - Hero `Hire` and `Work` are **links**, not buttons. Nav also exposes `Work`, `Hire`, and `Contact`. Using `--role link --name "Work"` from home may hit the header first; use `#home a[href$='/work']` for the hero path.
 - Proof chips with empty values are omitted. Do not fail the run if `#proof` is missing.
-- The hero heading is locked copy (`AI-Native Program & Product Leader`), not `[placeholder: hero.role_line]`. The value prop is locked copy (`I lead AI-native program and product delivery…`), not `[placeholder: hero.value_prop]`. Availability remains a placeholder. Do not expect live metrics or real case copy.
+- Hero heading: `AI-Native Program & Product Leader`. Value prop: `I lead AI-native program and product delivery…`. Availability: `[placeholder: hero.availability]`.
