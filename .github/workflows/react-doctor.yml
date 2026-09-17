@@ -1,0 +1,31 @@
+name: React Doctor
+
+on:
+  # Scans the PR's changed files and posts a sticky summary of issues introduced vs the merge base.
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  # Scans main on push to track the health-score trend without blocking the default branch.
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  statuses: write
+
+concurrency:
+  group: react-doctor-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  react-doctor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      # Advisory first: report findings, do not fail the check. Default PR scope is `changed`.
+      - uses: millionco/react-doctor@v2
+        with:
+          blocking: none
