@@ -85,7 +85,7 @@ The header logo text `Alex Bramall` is not a control. `src/components/layout/Nav
 
 Hamburger (viewport below `md`): the toggle has **no accessible name**. Use `nav.fixed > div > button` as documented in `features/nav.md`, then click the same section names as desktop.
 
-Smooth scroll is async. After a nav/CTA click, `wait-for --selector "#<id>"` until that section intersects the viewport; do not `sleep` a fixed number.
+Smooth scroll is async. After a nav/CTA click, `wait-for --selector "#<id>"` until that section is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. Snapshots mark `[in-view]` on nodes that currently intersect the viewport — use that, not mere presence, as scroll proof.
 
 ## Evidence
 

@@ -702,8 +702,13 @@ async function cmdClick(flags) {
             .map((el) => ({ role: implicitRole(el), name: accName(el) }));
           return { ok: false, visibleButtons };
         }
-        match.scrollIntoView({ block: 'center', inline: 'nearest' });
         const rect = match.getBoundingClientRect();
+        const onScreen =
+          rect.top >= 0 &&
+          rect.bottom <= window.innerHeight &&
+          rect.left >= 0 &&
+          rect.right <= window.innerWidth;
+        if (!onScreen) match.scrollIntoView({ block: 'center', inline: 'nearest' });
         match.click();
         return {
           ok: true,
@@ -727,6 +732,8 @@ async function cmdWaitFor(flags) {
   await withPage(async (cdp) => {
     const start = Date.now();
     let last = null;
+    let lastScroll = null;
+    let stableFrames = 0;
     while (Date.now() - start < timeout) {
       last = await evaluate(
         cdp,
@@ -740,11 +747,30 @@ async function cmdWaitFor(flags) {
           const el = document.querySelector(selector);
           if (!el) return { ok: false, detail: 'missing' };
           const r = el.getBoundingClientRect();
-          const inView = r.bottom > 0 && r.top < window.innerHeight;
-          return { ok: inView, detail: { id: el.id, top: Math.round(r.top), height: Math.round(r.height) } };
+          const header = 80;
+          const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+          const atEnd = window.scrollY >= maxScroll - 4;
+          const nearTop = r.top >= -24 && r.top <= header + 72;
+          const intersects = r.bottom > header && r.top < window.innerHeight;
+          const ok = intersects && (nearTop || atEnd);
+          return {
+            ok,
+            detail: {
+              id: el.id,
+              top: Math.round(r.top),
+              height: Math.round(r.height),
+              scrollY: Math.round(window.scrollY),
+              atEnd,
+              nearTop,
+            },
+          };
         })()`,
       );
-      if (last?.ok) {
+      const scrollY = last?.detail?.scrollY;
+      if (last?.ok && scrollY === lastScroll) stableFrames += 1;
+      else stableFrames = 0;
+      lastScroll = scrollY;
+      if (last?.ok && (last.detail == null || stableFrames >= 2)) {
         process.stdout.write(`${JSON.stringify(last, null, 2)}\n`);
         return;
       }
@@ -782,6 +808,11 @@ async function cmdSnapshot(flags) {
           const r = el.getBoundingClientRect();
           return r.width > 0 && r.height > 0;
         };
+        const inView = (el) => {
+          const r = el.getBoundingClientRect();
+          return r.bottom > 0 && r.top < window.innerHeight && r.width > 0 && r.height > 0;
+        };
+        const mark = (line, el) => line + (inView(el) ? ' [in-view]' : '');
         const lines = [
           'title: ' + document.title,
           'url: ' + location.href,
@@ -793,23 +824,23 @@ async function cmdSnapshot(flags) {
           if (!visible(el)) continue;
           const tag = el.tagName.toLowerCase();
           if (tag === 'section') {
-            lines.push('section#' + el.id);
+            lines.push(mark('section#' + el.id, el));
             continue;
           }
           if (tag === 'nav') {
-            lines.push('navigation');
+            lines.push(mark('navigation', el));
             continue;
           }
           const name = accName(el);
           if (!name) continue;
           if (tag === 'h1' || tag === 'h2' || tag === 'h3') {
-            lines.push('heading' + tag.slice(1) + ' "' + name.replace(/"/g, '\\\\"') + '"');
+            lines.push(mark('heading' + tag.slice(1) + ' "' + name.replace(/"/g, '\\\\"') + '"', el));
           } else if (tag === 'button') {
-            lines.push('button "' + name.replace(/"/g, '\\\\"') + '"');
+            lines.push(mark('button "' + name.replace(/"/g, '\\\\"') + '"', el));
           } else if (tag === 'a') {
-            lines.push('link "' + name.replace(/"/g, '\\\\"') + '" href=' + (el.getAttribute('href') || ''));
+            lines.push(mark('link "' + name.replace(/"/g, '\\\\"') + '" href=' + (el.getAttribute('href') || ''), el));
           } else if (tag === 'img') {
-            lines.push('img "' + name.replace(/"/g, '\\\\"') + '"');
+            lines.push(mark('img "' + name.replace(/"/g, '\\\\"') + '"', el));
           }
         }
         return lines.join('\\n');

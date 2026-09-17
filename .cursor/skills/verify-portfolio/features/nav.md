@@ -37,4 +37,5 @@ Preconditions:
 - Desktop buttons stay in the DOM at mobile width but are `display: none`. Clicks must use the **visible** button (the helper already skips hidden nodes).
 - The hamburger has no `aria-label`. The `nav.fixed > div > button` selector is the supported escape hatch; do not "fix" the product in a verification run.
 - `src/components/layout/Navigation.tsx` is not mounted. Driving lowercase labels (`projects`, `about`) from that unused component is not a user path.
-- Smooth scroll is not instantaneous. Assert intersecting `#id`, not a screenshot taken immediately after click.
+- Smooth scroll is not instantaneous. `wait-for --selector` waits until the section is near the top (or the page is at max scroll), then until `scrollY` is stable.
+- The header highlight can lag or land on a neighbor (for example `Skills` while `Featured Projects` is on screen) because active-section uses `scrollY + 100`. Treat the section heading in view as proof, not the pill highlight.

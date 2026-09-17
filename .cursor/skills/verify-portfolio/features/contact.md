@@ -34,5 +34,6 @@ Preconditions:
 
 - Activating mailto/social links leaves the app (mail client or a third-party site). Proof is the accessible name and `href`, not a successful send.
 - Hero `Get In Touch` is a button that only scrolls. After that click, the in-section control is the mailto **link** with the same visible name.
+- At the bottom of the page the header pill may still read `Experience` because contact cannot scroll fully to the top. Proof is `Let's Connect` in view, not the pill.
 - Footer copyright includes the current calendar year. Do not hard-code a year in assertions.
 - Email local-part uses capital `B` (`alex.Bramall@email.com`). Match it exactly.

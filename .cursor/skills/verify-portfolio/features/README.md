@@ -15,7 +15,7 @@ This directory is the maintained source for verifying the user-facing behavior o
 - Start every recipe from the top of the page (`control-portfolio browser goto`) unless its preconditions say otherwise.
 - Prefer role + accessible name over CSS. The hamburger is the documented exception.
 - Treat every command as literal. Keep quoted names and flags unchanged.
-- After clicks that scroll, wait for the target `section[id]` to intersect the viewport.
+- After clicks that scroll, wait until the target `section[id]` is aligned near the top (or the page is at max scroll) and `scrollY` is stable. Snapshots mark `[in-view]` for viewport proof.
 - Restore viewport 1280×800 after a mobile recipe. Do not remove proof artifacts during cleanup.
 
 ## Proof and skip reporting

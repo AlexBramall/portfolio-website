@@ -27,7 +27,7 @@ Preconditions:
 - **Work CTA.** Choose `View My Work`. Run `control-portfolio browser click --role button --name "View My Work"` then `control-portfolio browser wait-for --selector "#projects"`. `#projects` intersects the viewport and `Featured Projects` is visible.
 - **Return home.** Choose `Home`. Run `control-portfolio browser click --role button --name "Home"` then `control-portfolio browser wait-for --selector "#home"`. `#home` is in view again.
 - **Contact CTA.** Choose `Get In Touch` in the hero (a button, not the later mailto link). Run `control-portfolio browser click --role button --name "Get In Touch"` then `control-portfolio browser wait-for --selector "#contact"`. The heading `Let's Connect` is visible.
-- **Proof.** Capture home after returning to it. Run `control-portfolio browser click --role button --name "Home"`, `control-portfolio browser wait-for --selector "#home"`, `control-portfolio browser snapshot --aria --path artifacts/home/hero.aria.txt`, and `control-portfolio browser screenshot --path artifacts/home/hero.png`. Both artifacts show `Alex Bramall`, `View My Work`, and `Get In Touch`.
+- **Proof.** Capture home after returning to it. Run `control-portfolio browser click --role button --name "Home"`, `control-portfolio browser wait-for --selector "#home"`, `control-portfolio browser snapshot --aria --path artifacts/home/hero.aria.txt`, and `control-portfolio browser screenshot --path artifacts/home/hero.png`. The snapshot has `heading1 "Alex Bramall" [in-view]` and `scrollY` near `0`. The screenshot shows the name, `View My Work`, and `Get In Touch`.
 
 ## Gotchas
 
