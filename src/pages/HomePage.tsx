@@ -3,7 +3,7 @@ import { ProofBar } from '../components/sections/ProofBar';
 import { SelectedWork } from '../components/sections/SelectedWork';
 import { HowIWork } from '../components/sections/HowIWork';
 import { CompactStack } from '../components/sections/CompactStack';
-import { HireCta } from '../components/sections/HireCta';
+import { ContactStrip } from '../components/sections/ContactStrip';
 
 export const HomePage = () => {
   return (
@@ -13,7 +13,7 @@ export const HomePage = () => {
       <SelectedWork />
       <HowIWork />
       <CompactStack />
-      <HireCta />
+      <ContactStrip />
     </>
   );
 };

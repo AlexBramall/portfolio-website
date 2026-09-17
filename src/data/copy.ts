@@ -21,7 +21,7 @@ export const copy = {
     arc: placeholder('about.arc'),
   },
   contact: {
-    lookingFor: placeholder('contact.looking_for'),
+    intro: placeholder('contact.intro'),
     channels: placeholder('contact.channels'),
   },
   stack: {

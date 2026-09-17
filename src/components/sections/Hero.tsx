@@ -14,7 +14,7 @@ export const Hero = () => {
       </p>
       <div className="mt-10 flex flex-col gap-3 sm:flex-row">
         <Link to="/contact" className={buttonClassName('primary')}>
-          Hire
+          Contact
         </Link>
         <Link to="/work" className={buttonClassName('secondary')}>
           Work

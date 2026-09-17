@@ -6,7 +6,7 @@ This directory is the maintained source for verifying the user-facing behavior o
 
 - Launch with `control-portfolio launch --mode preview` so the site is served at `http://127.0.0.1:<port>/portfolio-website/`.
 - Set `VERIFY_RUN_ID` and, for concurrent runs, a unique `VERIFY_PORT`.
-- Run `control-portfolio doctor` and require the expected URL, Vite pid, title `Alex Bramall | Technical Program Manager`, mounted `#home`, and home sections `home selected-work how-i-work stack hire`.
+- Run `control-portfolio doctor` and require the expected URL, Vite pid, title `Alex Bramall | Technical Program Manager`, mounted `#home`, and home sections `home selected-work how-i-work stack contact-strip`.
 - Default viewport is 1280×800 (desktop nav visible). Switch viewport only when a recipe says so.
 - Never drive an instance that was not started by this verification run.
 
@@ -39,9 +39,9 @@ Keep implementation details out of the map. Name only user paths, stable handles
 
 ## Features
 
-- [Home / hero](./home.md) covers identity, the locked role line and value prop, and the Hire / Work CTAs.
-- [Navigation](./nav.md) covers desktop route links, Hire, and the mobile menu.
+- [Home / hero](./home.md) covers identity, the locked role line and value prop, and the Contact / Work CTAs.
+- [Navigation](./nav.md) covers desktop route links and the mobile menu.
 - [Work](./work.md) covers the selected-work grid and `/work` index.
 - [Case](./case.md) covers the sample case template and result badge.
 - [About](./about.md) covers the slim `/about` arc placeholder.
-- [Contact](./contact.md) covers `/contact`, Hire, and footer identity links.
+- [Contact](./contact.md) covers `/contact`, the home contact strip, and footer identity links.
