@@ -6,7 +6,7 @@ interface ResultBadgeProps {
 
 function badgeClassName(kind: ResultKind): string {
   const shared =
-    'inline-flex items-center rounded-pill px-2.5 py-1 text-caption font-medium capitalize';
+    'inline-flex items-center rounded-pill px-2.5 py-1 text-caption font-medium';
 
   switch (kind) {
     case 'measured':
