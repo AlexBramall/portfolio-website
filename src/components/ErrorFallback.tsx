@@ -1,13 +1,15 @@
-import React from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import * as Sentry from "@sentry/react";
+import type { FallbackRender } from "@sentry/react";
 
-interface ErrorFallbackProps {
-  error: Error;
-  resetError: () => void;
-}
+const errorMessage = (error: unknown): string => {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return String(error);
+};
 
-const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetError }) => {
+const ErrorFallback: FallbackRender = ({ error, resetError }) => {
   const handleReportError = () => {
     Sentry.showReportDialog();
   };
@@ -30,7 +32,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetError }) => {
         <div className="bg-surface rounded-2xl p-4 mb-6 text-left">
           <p className="text-caption text-light-muted mb-2">Error details:</p>
           <code className="text-xs text-dark-gray break-all">
-            {error.message}
+            {errorMessage(error)}
           </code>
         </div>
 

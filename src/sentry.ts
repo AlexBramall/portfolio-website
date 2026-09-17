@@ -1,19 +1,12 @@
 import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
 
 export const initSentry = () => {
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN || "", // You'll need to add this to your .env file
-    integrations: [
-      new BrowserTracing({
-        // Set tracing origins to connect sentry for performance monitoring
-        tracePropagationTargets: ["localhost", /^https:\/\/yourapp\.io\/api/],
-      }),
-    ],
+    integrations: [Sentry.browserTracingIntegration()],
     // Performance Monitoring
     tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
-    // Release Health
-    autoSessionTracking: true,
+    tracePropagationTargets: ["localhost", /^https:\/\/yourapp\.io\/api/],
     // Environment
     environment: import.meta.env.MODE,
     // Additional options
@@ -31,7 +24,7 @@ export const initSentry = () => {
 export const SentryErrorBoundary = Sentry.withErrorBoundary;
 
 // Manual error reporting functions
-export const captureError = (error: Error, context?: Record<string, any>) => {
+export const captureError = (error: Error, context?: Record<string, string>) => {
   Sentry.withScope((scope) => {
     if (context) {
       Object.keys(context).forEach(key => {
