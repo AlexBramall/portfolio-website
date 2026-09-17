@@ -5,7 +5,7 @@ description: Drive the Alex Bramall Vite+React+TS+Tailwind portfolio website in 
 
 # Verify portfolio website
 
-This repo is a **single-page** Vite + React + TypeScript + Tailwind portfolio. A user never leaves one document: they scroll (or click nav) between `#home`, `#about`, `#skills`, `#projects`, `#experience`, and `#contact`. There is no in-repo Playwright/Cypress harness. Drive the **production preview** (same `base` as GitHub Pages) through the Chrome CDP helper this skill ships.
+This repo is a **Vite + React + TypeScript + Tailwind** portfolio with **client routing** (`react-router-dom`) and GitHub Pages `base` `/portfolio-website/`. Routes: `/`, `/work`, `/work/:slug`, `/about`, `/contact`. There is no in-repo Playwright/Cypress harness. Drive the **production preview** (same `base` as GitHub Pages) through the Chrome CDP helper this skill ships.
 
 Read `features/README.md` before proving a change. Drive the mapped feature that matches the user-visible area you touched, not a convenient neighbor.
 
@@ -48,13 +48,13 @@ Pass means all of:
 - `state.json` exists and its `pid` is alive
 - that process command line contains `vite`
 - `GET <url>` is 2xx and the HTML title is `Alex Bramall | Technical Program Manager`
-- Chrome actually mounted the SPA: `#home h1` is `Alex Bramall` and sections `home about skills projects experience contact` exist
+- Chrome actually mounted the SPA: `nav` is present, `#home h1` exists, and home sections `home selected-work how-i-work stack hire` exist. `#proof` is optional (hidden when chips have no values).
 
 Exit `1` if any check fails. Do not drive a failing instance — cleanup, relaunch, doctor again.
 
 ## Drive
 
-Put the helper on your mental PATH as `control-portfolio`. Commands below are literal. Default viewport is **1280×800** so desktop nav (`md:flex`) is visible. Mobile nav is `md:hidden` and only exists after opening the unlabeled header menu.
+Put the helper on your mental PATH as `control-portfolio`. Commands below are literal. Default viewport is **1280×800** so desktop nav (`md:flex`) is visible. Mobile nav is `md:hidden` until `Open menu` is chosen.
 
 ```bash
 control-portfolio() {
@@ -62,9 +62,9 @@ control-portfolio() {
 }
 
 control-portfolio browser goto
-control-portfolio browser click --role button --name "Work"
-control-portfolio browser wait-for --selector "#projects"
-control-portfolio browser contains --text "Featured Projects"
+control-portfolio browser click --role link --name "Work"
+control-portfolio browser wait-for --selector "#work"
+control-portfolio browser contains --text "Work"
 control-portfolio browser snapshot --aria --path artifacts/nav/work.aria.txt
 control-portfolio browser screenshot --path artifacts/nav/work.png
 ```
@@ -73,19 +73,17 @@ Stable handles from this repo (prefer these over CSS/coordinates):
 
 | User control | Handle |
 | --- | --- |
-| Desktop nav | `button` named `Home`, `About`, `Skills`, `Work`, `Experience`, `Contact` |
-| Hero primary CTA | `button` named `View My Work` (scrolls to `#projects`) |
-| Hero secondary CTA | `button` named `Get In Touch` (scrolls to `#contact`) |
-| Project carousel | `button` named `Previous projects` / `Next projects` |
+| Wordmark | `link` named `Alex Bramall` (home) |
+| Desktop / mobile nav | `link` named `Work`, `About`, `Contact` |
+| Nav / hero primary CTA | `link` named `Hire` (goes to `/contact`) |
+| Hero secondary CTA | `#home a` whose accessible name is `Work` (goes to `/work`) |
+| Selected-work cards | `link` whose `href` contains `/work/<slug>` |
 | Footer | `link` named `Email`, `LinkedIn`, `GitHub` |
-| Contact CTA | `link` named `Get In Touch` (`mailto:`) — not a button |
-| Sections | `#home` `#about` `#skills` `#projects` `#experience` `#contact` |
+| Contact mailto | `link` named `Email` |
+| Home sections | `#home` `#selected-work` `#how-i-work` `#stack` `#hire` |
+| Routes | `#work` `#about` `#contact` plus `/work/:slug` case template |
 
-The header logo text `Alex Bramall` is not a control. `src/components/layout/Navigation.tsx` is unused; do not drive it.
-
-Hamburger (viewport below `md`): the toggle has **no accessible name**. Use `nav.fixed > div > button` as documented in `features/nav.md`, then click the same section names as desktop.
-
-Smooth scroll is async. After a nav/CTA click, `wait-for --selector "#<id>"` until that section is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. Snapshots mark `[in-view]` on nodes that currently intersect the viewport — use that, not mere presence, as scroll proof.
+Smooth in-page scroll is async. After a hash jump, `wait-for --selector "#<id>"` until that section is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. After a **route** click, wait-for the destination landmark the same way (`#work`, `#about`, `#contact`, or the case `h1`). Snapshots mark `[in-view]` on nodes that currently intersect the viewport — use that, not mere presence, as proof.
 
 ## Evidence
 
@@ -93,12 +91,12 @@ Write proof under `/tmp/verify-portfolio/$VERIFY_RUN_ID/evidence/` (relative `--
 
 Proof standards:
 
-- Exercise the real user path (click the visible `Work` button, not `element.scrollIntoView` from eval unless the feature file says so).
+- Exercise the real user path (click the visible `Work` link, not `history.pushState` from eval unless the feature file says so).
 - Capture the **action** and the **resulting state** (before snapshot optional; after snapshot + screenshot required).
-- UI proof includes an ARIA/text snapshot **and** a screenshot where the portfolio identity (`Alex Bramall`) and the target section heading are visible.
-- This app has no server mutations. Side effects to confirm: URL still on `/portfolio-website/`, `scrollY` changed, target `section[id]` in view, expected copy from `src/data/*` visible.
+- UI proof includes an ARIA/text snapshot **and** a screenshot where the portfolio identity (`Alex Bramall`) and the target heading are visible.
+- Side effects to confirm: URL stays under `/portfolio-website/`, path matches the route (`/`, `/work`, `/work/<slug>`, `/about`, `/contact`), expected placeholder copy (`[placeholder: …]`) is visible when that is the live content.
 - Do not call Sentry, mailto, LinkedIn, or GitHub as proof that the page works; asserting the `href`/`mailto` is enough for those controls.
-- Mocks: none. External Pexels images may fail offline; missing photos are not a product-failure unless the feature file is proving images.
+- Mocks: none. Do not invent metrics to make the proof bar appear.
 
 Record the feature file id and the entry point used next to the artifacts (a one-line `meta.txt` is enough).
 
@@ -122,4 +120,4 @@ Requires Node 18+ (repo: 20/22) and a Chrome/Chromium binary (`google-chrome` on
 ./.cursor/skills/verify-portfolio/helpers/control-portfolio.mjs --help
 ```
 
-Keep the feature map honest with `/maintain-verification-skill` when sections, labels, or nav change.
+Keep the feature map honest when routes, labels, or home modules change.
