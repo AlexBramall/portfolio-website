@@ -5,9 +5,19 @@ const highlights = [
   "Strong background in cloud technologies and digital transformation"
 ];
 
+// Short labels taken from the highlight copy — not truncated sentences.
+const credentials = [
+  'PMP',
+  'Scrum Master',
+  'Agile',
+  'Waterfall',
+  'Cloud',
+  'Digital Transformation',
+];
+
 export const About = () => {
   return (
-    <section id="about" className="py-10 sm:py-24 bg-surface px-4 sm:px-6 md:px-12">
+    <section id="about" className="py-32 md:py-40 bg-surface px-4 sm:px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
           {/* Photo */}
@@ -36,21 +46,21 @@ export const About = () => {
             </div>
 
             {/* Credentials */}
-            <div className="flex flex-wrap gap-2 mb-8">
-              {highlights.map((item, index) => (
+            <div className="flex flex-wrap gap-[10px] mb-8">
+              {credentials.map((label) => (
                 <span
-                  key={index}
+                  key={label}
                   className="border border-button-border rounded-full px-4 py-1.5 text-tag font-medium text-muted-text"
                 >
-                  {item.split(' ')[0]} {item.split(' ')[1]}
+                  {label}
                 </span>
               ))}
             </div>
 
             {/* Highlights */}
             <div className="space-y-4">
-              {highlights.map((item, index) => (
-                <p key={index} className="text-caption font-normal text-muted-text">
+              {highlights.map((item) => (
+                <p key={item} className="text-caption font-normal text-muted-text">
                   • {item}
                 </p>
               ))}
