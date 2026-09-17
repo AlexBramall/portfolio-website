@@ -6,16 +6,16 @@ This directory is the maintained source for verifying the user-facing behavior o
 
 - Launch with `control-portfolio launch --mode preview` so the site is served at `http://127.0.0.1:<port>/portfolio-website/`.
 - Set `VERIFY_RUN_ID` and, for concurrent runs, a unique `VERIFY_PORT`.
-- Run `control-portfolio doctor` and require the expected URL, Vite pid, title `Alex Bramall | Technical Program Manager`, and mounted sections.
+- Run `control-portfolio doctor` and require the expected URL, Vite pid, title `Alex Bramall | Technical Program Manager`, mounted `#home`, and home sections `home selected-work how-i-work stack hire`.
 - Default viewport is 1280×800 (desktop nav visible). Switch viewport only when a recipe says so.
 - Never drive an instance that was not started by this verification run.
 
 ## Driving conventions
 
 - Start every recipe from the top of the page (`control-portfolio browser goto`) unless its preconditions say otherwise.
-- Prefer role + accessible name over CSS. The hamburger is the documented exception.
+- Prefer role + accessible name over CSS. Hero `Work` is the documented exception when nav `Work` would match first — use `#home a` whose name is `Work`, or `a[href$="/work"]` inside `#home`.
 - Treat every command as literal. Keep quoted names and flags unchanged.
-- After clicks that scroll, wait until the target `section[id]` is aligned near the top (or the page is at max scroll) and `scrollY` is stable. Snapshots mark `[in-view]` for viewport proof.
+- After clicks that change route or hash, wait until the target landmark is aligned near the top (or the page is at max scroll) and `scrollY` is stable. Snapshots mark `[in-view]` for viewport proof.
 - Restore viewport 1280×800 after a mobile recipe. Do not remove proof artifacts during cleanup.
 
 ## Proof and skip reporting
@@ -39,10 +39,9 @@ Keep implementation details out of the map. Name only user paths, stable handles
 
 ## Features
 
-- [Home / hero](./home.md) covers identity, role line, and the two hero CTAs.
-- [Navigation](./nav.md) covers desktop section buttons and the mobile menu.
-- [About](./about.md) covers the about photo, philosophy copy, and credential chips.
-- [Projects](./projects.md) covers the featured-project carousel and its controls.
-- [Experience](./experience.md) covers the professional journey list.
-- [Skills](./skills.md) covers the competency cards.
-- [Contact](./contact.md) covers location, mailto CTA, and footer identity links.
+- [Home / hero](./home.md) covers identity, placeholder role line, and the Hire / Work CTAs.
+- [Navigation](./nav.md) covers desktop route links, Hire, and the mobile menu.
+- [Work](./work.md) covers the selected-work grid and `/work` index.
+- [Case](./case.md) covers the sample case template and result badge.
+- [About](./about.md) covers the slim `/about` arc placeholder.
+- [Contact](./contact.md) covers `/contact`, Hire, and footer identity links.

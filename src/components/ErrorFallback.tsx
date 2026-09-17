@@ -1,60 +1,65 @@
-import React from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
-import * as Sentry from "@sentry/react";
+import * as Sentry from '@sentry/react';
+import { Button } from './ui/Button';
 
 interface ErrorFallbackProps {
-  error: Error;
+  error: unknown;
   resetError: () => void;
 }
 
-const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetError }) => {
+function errorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return String(error);
+}
+
+const ErrorFallback = ({ error, resetError }: ErrorFallbackProps) => {
   const handleReportError = () => {
     Sentry.showReportDialog();
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8 text-center">
-        <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-          <AlertTriangle className="w-8 h-8 text-red-600" />
+    <div className="flex min-h-screen items-center justify-center bg-bg p-4">
+      <div className="w-full max-w-md rounded-card border border-border bg-surface p-8 text-center shadow-card">
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-pill bg-accent-subtle">
+          <AlertTriangle className="h-8 w-8 text-accent-hover" />
         </div>
-        
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">
-          Oops! Something went wrong
-        </h1>
-        
-        <p className="text-gray-600 mb-6">
-          We've encountered an unexpected error. Don't worry, our team has been notified and we're working on a fix.
+
+        <h1 className="mb-4 text-h2 text-text">Something went wrong</h1>
+
+        <p className="mb-6 text-body text-text-secondary">
+          An unexpected error was reported. You can retry or return home.
         </p>
-        
-        <div className="bg-gray-50 rounded-lg p-4 mb-6 text-left">
-          <p className="text-sm text-gray-500 mb-2">Error details:</p>
-          <code className="text-xs text-red-600 break-all">
-            {error.message}
-          </code>
+
+        <div className="mb-6 rounded-control bg-surface-muted p-4 text-left">
+          <p className="mb-2 text-caption text-text-muted">Error details:</p>
+          <code className="break-all text-caption text-danger">{errorMessage(error)}</code>
         </div>
-        
-        <div className="flex flex-col sm:flex-row gap-3">
-          <button
-            onClick={resetError}
-            className="flex-1 bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-700 transition-colors duration-200 flex items-center justify-center gap-2"
+
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Button type="button" variant="primary" className="flex-1" onClick={resetError}>
+            <RefreshCw className="h-4 w-4" />
+            Try again
+          </Button>
+
+          <Button
+            type="button"
+            variant="secondary"
+            className="flex-1"
+            onClick={() => {
+              window.location.href = import.meta.env.BASE_URL;
+            }}
           >
-            <RefreshCw className="w-4 h-4" />
-            Try Again
-          </button>
-          
-          <button
-            onClick={() => window.location.href = '/'}
-            className="flex-1 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center gap-2"
-          >
-            <Home className="w-4 h-4" />
-            Go Home
-          </button>
+            <Home className="h-4 w-4" />
+            Home
+          </Button>
         </div>
-        
+
         <button
+          type="button"
           onClick={handleReportError}
-          className="mt-4 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+          className="mt-4 text-caption text-text-muted hover:text-text"
         >
           Report this issue
         </button>

@@ -1,29 +1,50 @@
-export interface Project {
+export type ResultKind = 'measured' | 'proxy' | 'projected';
+
+export interface ProofChip {
+  id: string;
+  label: string;
+  value: string | null;
+}
+
+export interface CaseResultItem {
+  label: string;
+  value: string | null;
+}
+
+export interface CaseResult {
+  kind: ResultKind;
+  summary: string;
+  items: CaseResultItem[];
+}
+
+export interface CaseArtifact {
+  label: string;
+  href?: string;
+}
+
+export interface WorkCase {
+  slug: string;
   title: string;
-  description: string;
-  technologies: string[];
-  metrics: {
-    timeline: string;
-    team: string;
-    savings?: string;
-    users?: string;
-    efficiency?: string;
-    satisfaction?: string;
-  };
-  image: string;
+  outcome: string;
+  tags: string[];
+  metric: string | null;
+  featured: boolean;
+  context: string;
+  roleScope: string;
+  constraints: string;
+  insights: string;
+  optionsRejected: string;
+  decisions: string;
+  whatShipped: string;
+  aiHonesty: string;
+  results: CaseResult;
+  learnings: string;
+  artifacts: CaseArtifact[];
 }
 
-export interface Experience {
-  year: string;
-  role: string;
-  company: string;
-  achievements: string[];
+export interface StackChip {
+  id: string;
+  label: string;
 }
 
-export interface Competency {
-  category: string;
-  name: string;
-  description: string;
-}
-
-export type SectionId = 'home' | 'about' | 'skills' | 'projects' | 'experience' | 'contact';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost';

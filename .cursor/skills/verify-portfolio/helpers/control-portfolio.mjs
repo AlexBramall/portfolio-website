@@ -412,11 +412,14 @@ async function evaluate(cdp, expression) {
 async function waitForMount(cdp, timeoutMs = 20_000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
-    const mounted = await evaluate(cdp, `!!document.querySelector('#home h1')`);
+    const mounted = await evaluate(
+      cdp,
+      `!!document.querySelector('nav') && !!document.querySelector('h1')`,
+    );
     if (mounted) return;
     await sleep(150);
   }
-  throw new Error('Portfolio SPA did not mount (#home h1 missing)');
+  throw new Error('Portfolio SPA did not mount (nav or h1 missing)');
 }
 
 function resolveEvidencePath(filePath, fallbackName) {
@@ -564,15 +567,20 @@ async function cmdDoctor() {
         `({
           title: document.title,
           h1: document.querySelector('#home h1')?.textContent?.trim() || '',
+          wordmark: document.querySelector('nav a')?.textContent?.trim() || '',
           sections: [...document.querySelectorAll('section[id]')].map((el) => el.id),
-          workNav: [...document.querySelectorAll('button')].some((el) => el.textContent.trim() === 'Work')
+          workNav: [...document.querySelectorAll('a')].some((el) => el.textContent.trim() === 'Work'),
+          hireNav: [...document.querySelectorAll('a')].some((el) => el.textContent.trim() === 'Hire')
         })`,
       );
       rendered = probe;
       const renderOk =
-        probe.h1 === 'Alex Bramall' &&
+        Boolean(probe.h1) &&
+        probe.wordmark === 'Alex Bramall' &&
+        probe.workNav === true &&
+        probe.hireNav === true &&
         Array.isArray(probe.sections) &&
-        ['home', 'about', 'skills', 'projects', 'experience', 'contact'].every((id) =>
+        ['home', 'selected-work', 'how-i-work', 'stack', 'hire'].every((id) =>
           probe.sections.includes(id),
         );
       result.checks.push({
@@ -642,7 +650,7 @@ async function cmdGoto(flags, stateFromCaller, cdpFromCaller) {
     await waitForMount(cdp);
     const info = await evaluate(
       cdp,
-      `({ title: document.title, href: location.href, h1: document.querySelector('#home h1')?.textContent?.trim() })`,
+      `({ title: document.title, href: location.href, h1: document.querySelector('h1')?.textContent?.trim() })`,
     );
     process.stdout.write(`${JSON.stringify({ ok: true, ...info }, null, 2)}\n`);
   };
