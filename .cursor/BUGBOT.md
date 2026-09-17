@@ -20,7 +20,7 @@ Prefer **accessible names** on interactive controls (visible text, `aria-label`,
 
 ## Content and design
 
-- **Do not invent portfolio content or metrics.** Remaining Phase 1 copy is labeled placeholders (`[placeholder: hero.value_prop]`, `work.card.*`, etc.). Locked strings that replace a placeholder (for example `hero.role_line`) are not invented content. Do not block PRs for leaving other placeholders, and do not suggest replacing them with made-up real-sounding work, metrics, or employers.
+- **Do not invent portfolio content or metrics.** Remaining Phase 1 copy is labeled placeholders (`[placeholder: hero.availability]`, `work.card.*`, etc.). Locked strings that replace a placeholder (for example `hero.role_line` or `hero.value_prop`) are not invented content. Do not block PRs for leaving other placeholders, and do not suggest replacing them with made-up real-sounding work, metrics, or employers.
 - **Proof bar must hide empty chips.** Never invent numbers to fill it.
 - **Design source of truth is Modern AI Signal** (locked Design SoT: https://app.notion.com/p/3de6d089ce1881a8b57de6a133a31d95). Tokens live in `src/index.css` and `tailwind.config.js`. Editorial Clean is deprecated. Accent is `#0EA5E9`. **Flag green CTAs** (`#48A111`, emerald fill used as a primary button) and any dark-mode toggle. Do not revive magazine-scale display type or a projects carousel.
 - Selected work is a **grid**, not a carousel. Case results must badge `measured` | `proxy` | `projected` and must not present proxy as measured.

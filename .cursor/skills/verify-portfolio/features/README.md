@@ -39,7 +39,7 @@ Keep implementation details out of the map. Name only user paths, stable handles
 
 ## Features
 
-- [Home / hero](./home.md) covers identity, the locked role line, and the Hire / Work CTAs.
+- [Home / hero](./home.md) covers identity, the locked role line and value prop, and the Hire / Work CTAs.
 - [Navigation](./nav.md) covers desktop route links, Hire, and the mobile menu.
 - [Work](./work.md) covers the selected-work grid and `/work` index.
 - [Case](./case.md) covers the sample case template and result badge.
