@@ -30,7 +30,7 @@ Usage:
   control-portfolio browser click --role ROLE --name NAME
   control-portfolio browser click --selector CSS
   control-portfolio browser wait-for --text TEXT [--timeout MS]
-  control-portfolio browser wait-for --selector CSS [--timeout MS]
+  control-portfolio browser wait-for --selector CSS [--timeout MS] [--in-view]
   control-portfolio browser contains --text TEXT
   control-portfolio browser snapshot --aria [--path FILE]
   control-portfolio browser screenshot [--path FILE] [--full-page]
@@ -740,6 +740,13 @@ async function cmdClick(flags) {
 
 async function cmdWaitFor(flags) {
   const timeout = Number(flags.timeout || 8000);
+  const inViewOnly = Boolean(flags['in-view']);
+  if (inViewOnly && flags.text) {
+    throw new Error('wait-for --in-view requires --selector, not --text');
+  }
+  if (inViewOnly && !flags.selector) {
+    throw new Error('wait-for --in-view requires --selector');
+  }
   await withPage(async (cdp) => {
     const start = Date.now();
     let last = null;
@@ -751,6 +758,7 @@ async function cmdWaitFor(flags) {
         `(() => {
           const text = ${JSON.stringify(flags.text || null)};
           const selector = ${JSON.stringify(flags.selector || null)};
+          const inViewOnly = ${JSON.stringify(inViewOnly)};
           if (text) {
             const body = document.body.innerText || '';
             return { ok: body.includes(text), detail: text };
@@ -763,7 +771,8 @@ async function cmdWaitFor(flags) {
           const atEnd = window.scrollY >= maxScroll - 4;
           const nearTop = r.top >= -24 && r.top <= header + 72;
           const intersects = r.bottom > header && r.top < window.innerHeight;
-          const ok = intersects && (nearTop || atEnd);
+          const inView = r.bottom > 0 && r.top < window.innerHeight && r.width > 0 && r.height > 0;
+          const ok = inViewOnly ? inView : intersects && (nearTop || atEnd);
           return {
             ok,
             detail: {
@@ -773,6 +782,7 @@ async function cmdWaitFor(flags) {
               scrollY: Math.round(window.scrollY),
               atEnd,
               nearTop,
+              inView,
             },
           };
         })()`,
@@ -865,8 +875,9 @@ async function cmdSnapshot(flags) {
 }
 
 async function cmdScreenshot(flags) {
-  await withPage(async (cdp) => {
+  await withPage(async (cdp, state) => {
     const fullPage = Boolean(flags['full-page']);
+    const previous = state.chrome?.viewport || { width: 1280, height: 800, mobile: false };
     if (fullPage) {
       const metrics = await evaluate(
         cdp,
@@ -881,6 +892,9 @@ async function cmdScreenshot(flags) {
     });
     const outPath = resolveEvidencePath(flags.path, 'screenshot.png');
     fs.writeFileSync(outPath, Buffer.from(shot.data, 'base64'));
+    if (fullPage) {
+      await setViewport(cdp, previous.width, previous.height, previous.mobile);
+    }
     process.stdout.write(`Wrote ${outPath}\n`);
   });
 }

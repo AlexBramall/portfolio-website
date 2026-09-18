@@ -64,6 +64,8 @@ control-portfolio() {
 control-portfolio browser goto
 control-portfolio browser click --role link --name "Work"
 control-portfolio browser wait-for --selector "#work"
+control-portfolio browser eval --expr "document.getElementById('work-grid').scrollIntoView({block:'start'})"
+control-portfolio browser wait-for --selector "#work-grid" --in-view
 control-portfolio browser contains --text "Work"
 control-portfolio browser snapshot --aria --path artifacts/nav/work.aria.txt
 control-portfolio browser screenshot --path artifacts/nav/work.png
@@ -84,7 +86,7 @@ Stable handles from this repo (prefer these over CSS/coordinates):
 | Home sections | `#home` `#selected-work` `#how-i-work` `#stack` `#contact-strip` |
 | Routes | `#work` `#work-grid` `#work-cta` `#about` `#contact` plus `/work/:slug` case template |
 
-Smooth in-page scroll is async. After a hash jump, `wait-for --selector "#<id>"` until that section is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. After a **route** click, wait-for the destination landmark the same way (`#work`, `#about`, `#contact`, or the case `h1`). Snapshots mark `[in-view]` on nodes that currently intersect the viewport — use that, not mere presence, as proof.
+Smooth in-page scroll is async. After a hash jump or **route** click, `wait-for --selector "#<id>"` until that landmark is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. Landmarks: `#work`, `#about`, `#contact`, or the case `h1`. Below-fold sections (`#work-grid`, `#work-cta`, `#selected-work`, `#contact-strip`) are often already intersecting after a route land, but default wait-for still requires near-top alignment. Scroll them into view, then `wait-for --selector "#<id>" --in-view` — that flag uses the same geometry as snapshot `[in-view]` (intersects the viewport), not mere presence and not near-top.
 
 ## Evidence
 
