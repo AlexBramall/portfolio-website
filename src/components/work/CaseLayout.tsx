@@ -63,7 +63,7 @@ export const CaseLayout = ({ workCase }: CaseLayoutProps) => {
 
       <div className="max-w-prose space-y-12">
         <header>
-          <p className="mb-3 text-caption uppercase tracking-wide text-accent-2">{workCase.eyebrow}</p>
+          <p className="mb-3 text-caption tracking-wide text-accent-2">{workCase.eyebrow}</p>
           <h1 className="text-display text-text">{workCase.title}</h1>
           <p className="mt-4 text-body text-text-secondary">{workCase.outcome}</p>
           <div className="mt-6 flex flex-wrap gap-2">
