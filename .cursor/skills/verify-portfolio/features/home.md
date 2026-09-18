@@ -4,7 +4,7 @@ The hero is the first screen: name, locked role line, value prop, availability c
 
 ## Sub-features
 
-- `hero-identity` shows `Alex Bramall` as the eyebrow and `AI-Native Program & Product Leader` as the page heading.
+- `hero-identity` shows `AI-Native Program & Product Leader` as the page heading. From `md` up, the hero also shows an `Alex Bramall` eyebrow. Below `md`, that eyebrow is omitted because the header wordmark already shows the name.
 - `hero-work-cta` opens `/work` from the hero `Work` control.
 - `hero-contact-cta` opens `/contact` from the hero `Contact` control.
 - `home-contact-strip` shows the home contact strip with get-in-touch copy and a `Contact` link.
@@ -24,7 +24,7 @@ Preconditions:
 - Viewport is 1280×800.
 - `control-portfolio doctor` reports the expected URL and mounted `#home h1`.
 
-- **Open home.** Load the app. Run `control-portfolio browser goto`. The heading includes `AI-Native Program & Product Leader` and the eyebrow `Alex Bramall` is visible.
+- **Open home.** Load the app. Run `control-portfolio browser goto`. The heading includes `AI-Native Program & Product Leader`. At this desktop viewport the `Alex Bramall` eyebrow is visible above the heading.
 - **Read copy.** Confirm copy without navigating away. Run `control-portfolio browser contains --text "I lead AI-native program and product delivery"`. Availability shows `[placeholder: hero.availability]`.
 - **Work CTA.** Choose hero `Work` (not the header `Work` link). Run `control-portfolio browser click --selector "#home a[href$='/work']"` then `control-portfolio browser wait-for --selector "#work"`. The path ends with `/work` and heading `Work` is visible.
 - **Return home.** Choose the wordmark. Run `control-portfolio browser click --role link --name "Alex Bramall"` then `control-portfolio browser wait-for --selector "#home"`. `#home` is in view again.
@@ -38,3 +38,4 @@ Preconditions:
 - Proof chips with empty values are omitted. Do not fail the run if `#proof` is missing.
 - Hero heading: `AI-Native Program & Product Leader`. Value prop: `I lead AI-native program and product delivery…`. Availability: `[placeholder: hero.availability]`.
 - There is no `#hire` landmark and no `Hire` control.
+- Below `md`, `#home` has no name eyebrow. Identity on small screens is the header wordmark plus the role-line heading.
