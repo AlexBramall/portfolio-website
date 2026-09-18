@@ -21,6 +21,7 @@ Interactive controls have accessible names (visible text, `aria-label`, or `aria
 - Tokens live in `src/index.css` and `tailwind.config.js`. Accent is `#0EA5E9`. Flag green primary CTAs (`#48A111`) and dark-mode toggles.
 - Selected work is a grid. Case results badge `measured` | `proxy` | `projected`; proxy is not shown as measured.
 - This site does not include `/writing` or a live `/lab`.
+- UI and product diffs include visual proof in the pull request description: screenshots or a short recording of how the change looks and how key interactions behave. A UI change without that proof is incomplete.
 
 ## Local preview helper
 
