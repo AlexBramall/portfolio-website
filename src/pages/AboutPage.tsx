@@ -43,12 +43,14 @@ export const AboutPage = () => {
       </Section>
 
       <Section id="about-cta" tone="muted">
-        <h2 className="text-h2 text-text">Contact</h2>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link to="/contact" className={buttonClassName('primary')}>
-            Contact
-          </Link>
-          <ResumeLink className={buttonClassName('secondary')} />
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-h3 text-text">Get in touch</h2>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link to="/contact" className={buttonClassName('primary')}>
+              Contact
+            </Link>
+            <ResumeLink className={buttonClassName('secondary')} />
+          </div>
         </div>
       </Section>
     </>
