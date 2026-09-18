@@ -1,11 +1,16 @@
 # About
 
-About is a slim `/about` page with the arc placeholder. No certificate wall and no required portrait in Phase 1.
+About is `/about`: a short arc, Contact and Resume CTAs, three employer chapter tiles, a compact credentials row, and a quiet Contact + Resume strip. No certificate wall and no required portrait.
 
 ## Sub-features
 
 - `about-open` opens `/about` from nav `About`.
 - `about-arc` shows `[placeholder: about.arc]`.
+- `about-hero-ctas` shows a primary `Contact` link to `/contact` and a secondary `Resume` link that opens `resume.url` in a new tab.
+- `about-chapters` shows Form Factory, Nomad, and Gilleard tiles with locked role arcs and labeled chapter placeholders.
+- `about-credentials` shows a compact credentials row of labeled placeholders, not a certificate wall.
+- `about-cta` repeats Contact and Resume in the page footer strip.
+- `about-deep-link` opens `/portfolio-website/about` directly.
 
 ## How to get to it (user POV)
 
@@ -21,9 +26,17 @@ Preconditions:
 
 - **Open about.** Choose `About`. Run `control-portfolio browser goto` then `control-portfolio browser click --role link --name "About"` then `control-portfolio browser wait-for --selector "#about"`. Heading `About` is in view and the path ends with `/about`.
 - **Arc.** Confirm placeholder copy. Run `control-portfolio browser contains --text "[placeholder: about.arc]"`.
-- **Proof.** Run `control-portfolio browser snapshot --aria --path artifacts/about/page.aria.txt` and `control-portfolio browser screenshot --path artifacts/about/page.png`. Artifacts show heading `About` and the arc placeholder. There is no credential chip wall.
+- **Hero CTAs.** Confirm the hero row. Run `control-portfolio browser snapshot --aria --path artifacts/about/hero.aria.txt`. `#about` includes `link "Contact"` to `/contact` and `link "Resume"` with `target=_blank` and the `resume.url` href. Do not activate Resume; it opens a new tab.
+- **Chapters.** Bring the tiles into view. Run `control-portfolio browser eval --expr "document.getElementById('about-chapters').scrollIntoView({block:'start'})"` then `control-portfolio browser wait-for --selector "#about-chapters"`. The section lists Form Factory, Nomad, and Gilleard. Role arcs are `Ops & delivery`, `TPM → Ecommerce Manager → Director of E-commerce & Digital Product`, and `Digital Project / Product Manager`. Bodies show `[placeholder: about.chapter.form_factory]`, `[placeholder: about.chapter.nomad]`, and `[placeholder: about.chapter.gilleard]`.
+- **Credentials.** Run `control-portfolio browser eval --expr "document.getElementById('about-credentials').scrollIntoView({block:'start'})"` then `control-portfolio browser wait-for --selector "#about-credentials"`. The row includes `[placeholder: about.credentials.1]` and is a compact chip row, not a cert grid.
+- **Footer strip.** Run `control-portfolio browser eval --expr "document.getElementById('about-cta').scrollIntoView({block:'start'})"` then `control-portfolio browser wait-for --selector "#about-cta"`. The strip heading is `Get in touch` and it repeats `Contact` and `Resume`.
+- **Deep link.** Open the route directly. Run `control-portfolio browser goto --url "http://127.0.0.1:$VERIFY_PORT/portfolio-website/about"` then `control-portfolio browser wait-for --selector "#about"`. The path stays under `/portfolio-website/` and ends with `/about`.
+- **Proof.** Capture the hero and the three tiles. Run `control-portfolio browser goto --url "http://127.0.0.1:$VERIFY_PORT/portfolio-website/about"`, `control-portfolio browser wait-for --selector "#about"`, `control-portfolio browser snapshot --aria --path artifacts/about/page.aria.txt`, and `control-portfolio browser screenshot --full-page --path artifacts/about/page.png`. Artifacts show heading `About`, the arc placeholder, Contact + Resume, and the three employer tiles. There is no credential chip wall.
 
 ## Gotchas
 
 - About is a route, not a home section. Doctor on home will not list `#about`.
 - Do not assert old Editorial Clean copy (`Leadership Philosophy`, `Certified PMP`) or a stock portrait.
+- Employer names and role arcs are locked. Do not treat invented metrics or blurbs as the live chapter bodies.
+- Hero and footer `Contact` / `Resume` share names with header links. Prefer `#about a` and `#about-cta a` when the header would match first.
+- Activating `Resume` leaves the app. Proof is the accessible name, `href`, and `target=_blank`.

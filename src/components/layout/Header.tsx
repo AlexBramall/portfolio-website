@@ -1,12 +1,27 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
+import { ResumeLink } from '../ui/ResumeLink';
 
-const navItems = [
-  { to: '/work', label: 'Work' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
-] as const;
+type RouteNavItem = {
+  kind: 'route';
+  to: '/work' | '/about' | '/contact';
+  label: 'Work' | 'About' | 'Contact';
+};
+
+type ExternalNavItem = {
+  kind: 'external';
+  label: 'Resume';
+};
+
+type NavItem = RouteNavItem | ExternalNavItem;
+
+const navItems: readonly NavItem[] = [
+  { kind: 'route', to: '/work', label: 'Work' },
+  { kind: 'route', to: '/about', label: 'About' },
+  { kind: 'external', label: 'Resume' },
+  { kind: 'route', to: '/contact', label: 'Contact' },
+];
 
 function navLinkClassName(isActive: boolean, compact: boolean): string {
   const shape = compact
@@ -18,6 +33,35 @@ function navLinkClassName(isActive: boolean, compact: boolean): string {
       ? 'bg-accent-subtle text-accent'
       : 'text-text-secondary hover:bg-surface-muted hover:text-text'
   }`;
+}
+
+function NavItemControl({
+  item,
+  compact,
+  onNavigate,
+}: {
+  item: NavItem;
+  compact: boolean;
+  onNavigate?: () => void;
+}) {
+  switch (item.kind) {
+    case 'route':
+      return (
+        <NavLink
+          to={item.to}
+          onClick={onNavigate}
+          className={({ isActive }) => navLinkClassName(isActive, compact)}
+        >
+          {item.label}
+        </NavLink>
+      );
+    case 'external':
+      return <ResumeLink className={navLinkClassName(false, compact)} onClick={onNavigate} />;
+    default: {
+      const exhaustive: never = item;
+      throw new Error(`Unhandled nav item: ${JSON.stringify(exhaustive)}`);
+    }
+  }
 }
 
 export const Header = () => {
@@ -35,13 +79,7 @@ export const Header = () => {
 
           <div className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) => navLinkClassName(isActive, true)}
-              >
-                {item.label}
-              </NavLink>
+              <NavItemControl key={item.label} item={item} compact />
             ))}
           </div>
 
@@ -61,14 +99,7 @@ export const Header = () => {
         <div className="border-t border-border bg-surface/95 px-5 py-6 md:hidden">
           <div className="flex flex-col gap-1">
             {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                onClick={closeMenu}
-                className={({ isActive }) => navLinkClassName(isActive, false)}
-              >
-                {item.label}
-              </NavLink>
+              <NavItemControl key={item.label} item={item} compact={false} onNavigate={closeMenu} />
             ))}
           </div>
         </div>

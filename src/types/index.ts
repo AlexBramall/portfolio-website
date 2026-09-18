@@ -48,4 +48,13 @@ export interface StackChip {
   label: string;
 }
 
+export type AboutChapterId = 'form-factory' | 'nomad' | 'gilleard';
+
+export interface AboutChapter {
+  id: AboutChapterId;
+  employer: string;
+  roleArc: string;
+  body: string;
+}
+
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';

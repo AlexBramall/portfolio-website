@@ -11,7 +11,7 @@ Personal portfolio: Vite + React 18 + TypeScript SPA on GitHub Pages (`base: '/p
 
 ## Accessibility
 
-Interactive controls have accessible names (visible text, `aria-label`, or `aria-labelledby`). Footer icons are labeled Email / LinkedIn / GitHub. The mobile header control is named Open menu / Close menu. Nav lives in `src/components/layout/Header.tsx` (Work · About · Contact).
+Interactive controls have accessible names (visible text, `aria-label`, or `aria-labelledby`). Footer icons are labeled Email / LinkedIn / GitHub. The mobile header control is named Open menu / Close menu. Nav lives in `src/components/layout/Header.tsx` (Work · About · Resume · Contact). Resume is a text link to the PDF (`target="_blank"` + `rel="noopener noreferrer"`), not a filled CTA.
 
 ## Content and design
 
