@@ -4,22 +4,26 @@
 
 @layer base {
   :root {
-    --bg: #fafbfc;
+    --bg: #f5f5f7;
     --surface: #ffffff;
-    --surface-muted: #f1f5f9;
-    --border: #e2e8f0;
-    --border-strong: #cbd5e1;
-    --text: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-    --accent: #0ea5e9;
-    --accent-hover: #0284c7;
-    --accent-subtle: #e0f2fe;
+    --surface-muted: #ebebf0;
+    --border: #d2d2d7;
+    --border-strong: #b0b0b8;
+    --text: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-muted: #86868b;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-subtle: #dbeafe;
+    --accent-2: #8b5cf6;
+    --accent-2-subtle: #ede9fe;
+    --accent-3: #14b8a6;
+    --accent-3-subtle: #ccfbf1;
     --success: #10b981;
     --danger: #ef4444;
-    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
-    --radius-control: 10px;
-    --radius-card: 14px;
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.06);
+    --radius-control: 12px;
+    --radius-card: 20px;
     --radius-pill: 999px;
   }
 
@@ -33,23 +37,23 @@
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 17px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--text);
     background-color: var(--bg);
   }
 
   h1 {
-    font-size: clamp(40px, 6vw, 64px);
+    font-size: clamp(44px, 7vw, 72px);
     font-weight: 650;
     letter-spacing: -0.03em;
     line-height: 1.05;
   }
 
   h2 {
-    font-size: clamp(28px, 3vw, 32px);
+    font-size: clamp(28px, 3vw, 34px);
     font-weight: 600;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.15;
   }
 
   h3 {
@@ -67,6 +71,10 @@
 @layer utilities {
   .tabular {
     font-variant-numeric: tabular-nums;
+  }
+
+  .bg-hero-wash {
+    background-image: linear-gradient(165deg, #e8f1fe 0%, #f5f5f7 46%, #f0ebff 100%);
   }
 }
 

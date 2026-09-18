@@ -10,7 +10,10 @@ export const SelectedWork = () => {
         <div>
           <h2 className="text-h2 text-text">Selected work</h2>
         </div>
-        <Link to="/work" className="text-label text-accent hover:text-accent-hover">
+        <Link
+          to="/work"
+          className="text-label text-accent transition-colors duration-200 hover:text-accent-hover"
+        >
           All work
         </Link>
       </div>

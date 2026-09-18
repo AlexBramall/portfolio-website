@@ -1,17 +1,34 @@
 import { ReactNode } from 'react';
 
+type SectionTone = 'default' | 'muted' | 'hero';
+
 interface SectionProps {
   id?: string;
   children: ReactNode;
-  muted?: boolean;
+  tone?: SectionTone;
   className?: string;
   width?: 'content' | 'prose';
+}
+
+function toneClassName(tone: SectionTone): string {
+  switch (tone) {
+    case 'default':
+      return 'bg-bg';
+    case 'muted':
+      return 'bg-surface-muted';
+    case 'hero':
+      return 'bg-hero-wash';
+    default: {
+      const exhaustive: never = tone;
+      throw new Error(`Unhandled section tone: ${exhaustive}`);
+    }
+  }
 }
 
 export const Section = ({
   id,
   children,
-  muted = false,
+  tone = 'default',
   className = '',
   width = 'content',
 }: SectionProps) => {
@@ -20,7 +37,7 @@ export const Section = ({
   return (
     <section
       id={id}
-      className={`${muted ? 'bg-surface-muted' : 'bg-bg'} px-6 py-16 md:px-10 md:py-20 lg:px-20 lg:py-24 ${className}`.trim()}
+      className={`${toneClassName(tone)} px-5 py-16 md:px-8 md:py-20 lg:px-16 lg:py-24 ${className}`.trim()}
     >
       <div className={`mx-auto ${maxWidth}`}>{children}</div>
     </section>

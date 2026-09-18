@@ -35,6 +35,7 @@ const sampleFieldSlots = (card: '1' | '2' | '3'): Pick<
 export const workCases: WorkCase[] = [
   {
     slug: 'sample-case',
+    eyebrow: placeholder('work.card.1.eyebrow'),
     title: placeholder('work.card.1.title'),
     outcome: placeholder('work.card.1.outcome'),
     tags: [
@@ -48,6 +49,7 @@ export const workCases: WorkCase[] = [
   },
   {
     slug: 'selected-work-two',
+    eyebrow: placeholder('work.card.2.eyebrow'),
     title: placeholder('work.card.2.title'),
     outcome: placeholder('work.card.2.outcome'),
     tags: [
@@ -60,6 +62,7 @@ export const workCases: WorkCase[] = [
   },
   {
     slug: 'selected-work-three',
+    eyebrow: placeholder('work.card.3.eyebrow'),
     title: placeholder('work.card.3.title'),
     outcome: placeholder('work.card.3.outcome'),
     tags: [

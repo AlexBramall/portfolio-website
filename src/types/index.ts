@@ -24,6 +24,7 @@ export interface CaseArtifact {
 
 export interface WorkCase {
   slug: string;
+  eyebrow: string;
   title: string;
   outcome: string;
   tags: string[];

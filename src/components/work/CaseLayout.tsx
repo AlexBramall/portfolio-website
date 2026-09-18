@@ -1,5 +1,6 @@
 import { WorkCase } from '../../types';
 import { isFilled } from '../../lib/placeholder';
+import { tagChipClassName } from '../../lib/chipStyles';
 import { ResultBadge } from '../ui/ResultBadge';
 
 interface CaseLayoutProps {
@@ -51,7 +52,7 @@ export const CaseLayout = ({ workCase }: CaseLayoutProps) => {
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
-                className="text-caption text-text-muted transition-colors duration-150 hover:text-accent"
+                className="text-caption text-text-muted transition-colors duration-200 hover:text-accent"
               >
                 {item.label}
               </a>
@@ -62,15 +63,12 @@ export const CaseLayout = ({ workCase }: CaseLayoutProps) => {
 
       <div className="max-w-prose space-y-12">
         <header>
-          <p className="mb-3 text-caption uppercase tracking-wide text-text-muted">Case</p>
+          <p className="mb-3 text-caption uppercase tracking-wide text-accent-2">{workCase.eyebrow}</p>
           <h1 className="text-display text-text">{workCase.title}</h1>
           <p className="mt-4 text-body text-text-secondary">{workCase.outcome}</p>
           <div className="mt-6 flex flex-wrap gap-2">
-            {workCase.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-pill bg-surface-muted px-3 py-1 text-caption text-text-muted"
-              >
+            {workCase.tags.map((tag, index) => (
+              <span key={tag} className={tagChipClassName(index)}>
                 {tag}
               </span>
             ))}
