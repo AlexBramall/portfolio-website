@@ -1,34 +1,38 @@
-# Pull request
+<!--
+Fill these sections in order. Drop a section when it has nothing to say.
+Do not use Summary or Test plan boilerplate.
+-->
 
-## Summary
+## Why
 
-<!-- What changed and why. Link related issues if any. -->
+<!-- Intent and approach in one or two short paragraphs. No SHA lists or rebase genealogy. -->
 
+## Scope
 
+<!-- Bullets of real paths and symbols. Name both sides of a rename. State in/out only when the boundary matters. -->
+
+-
+
+## Tradeoffs
+
+<!-- Rejected alternatives a reviewer would otherwise ask about. Delete this heading when there was no real choice. -->
+
+## Blast Radius
+
+<!-- One to three sentences: who or what this touches, and why it is safe or risky. -->
+
+## Verification
+
+<!--
+Name real run paths and their outcomes, not a checkbox list.
+Example: `npm run lint`, `npm run typecheck`, and `npm run build` green.
+List routes and interactions proven.
+
+Constraints: GitHub Pages base `/portfolio-website/`. Nav is Work · About · Resume · Contact. No Hire CTAs or marquees.
+-->
 
 ## Screenshots / recordings
 
-**Required for UI / product changes.** Attach or link images or a short video that prove:
-
-- How the change looks (layout, copy, spacing)
-- Key interactions (navigation, clicks, forms, hover/focus, and mobile if layout changed)
+**Required for UI / product changes.** Attach durable GitHub-hosted images or a short video that prove how the change looks and how key interactions behave (navigation, clicks, forms, hover/focus, and mobile if layout changed).
 
 Docs-only or non-visual changes: write **N/A** and say why.
-
-
-
-## Test plan
-
-- [ ] `npm run lint`
-- [ ] `npm run typecheck`
-- [ ] `npm run build`
-- [ ] Manual checks (list routes and interactions exercised)
-
-
-
-## Checklist
-
-- [ ] No hire language (no Hire CTAs, links, or `#hire` section)
-- [ ] No marquees
-- [ ] Contact-only primary CTA (nav and hero point to Contact, not Hire)
-- [ ] GitHub Pages base path (`/portfolio-website/`) is preserved for assets, router, and links
