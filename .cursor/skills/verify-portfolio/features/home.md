@@ -30,7 +30,7 @@ Preconditions:
 - **Return home.** Choose the wordmark. Run `control-portfolio browser click --role link --name "Alex Bramall"` then `control-portfolio browser wait-for --selector "#home"`. `#home` is in view again.
 - **Contact CTA.** Choose hero `Contact`. Run `control-portfolio browser click --selector "#home a[href$='/contact']"` then `control-portfolio browser wait-for --selector "#contact"`. The heading `Contact` is visible and the path ends with `/contact`.
 - **Contact strip.** Return home and bring the strip into view. Run `control-portfolio browser click --role link --name "Alex Bramall"`, `control-portfolio browser wait-for --selector "#home"`, `control-portfolio browser eval --expr "document.getElementById('contact-strip').scrollIntoView({block:'start'})"`, then `control-portfolio browser wait-for --selector "#contact-strip" --in-view`. The strip heading is `Contact` and copy includes `[placeholder: contact.intro]` and `[placeholder: contact.channels]`. There is no collapsible hide-section control.
-- **Proof.** Capture home after returning to it. Run `control-portfolio browser click --role link --name "Alex Bramall"`, `control-portfolio browser wait-for --selector "#home"`, `control-portfolio browser snapshot --aria --path artifacts/home/hero.aria.txt`, and `control-portfolio browser screenshot --path artifacts/home/hero.png`. The snapshot has `heading1 "AI-Native Program & Product Leader" [in-view]` and links named `Contact` and `Work` inside `#home`. The screenshot shows the filled blue Contact button, not green.
+- **Proof.** Capture home from the top. Run `control-portfolio browser goto`, `control-portfolio browser wait-for --selector "#home"`, `control-portfolio browser snapshot --aria --path artifacts/home/hero.aria.txt`, and `control-portfolio browser screenshot --path artifacts/home/hero.png`. The snapshot has `heading1 "AI-Native Program & Product Leader" [in-view]` and links named `Contact` and `Work` inside `#home`. The screenshot shows the filled blue Contact button, not green.
 
 ## Gotchas
 
@@ -39,3 +39,4 @@ Preconditions:
 - Hero heading: `AI-Native Program & Product Leader`. Value prop: `I lead AI-native program and product delivery…`. Availability: `[placeholder: hero.availability]`.
 - There is no `#hire` landmark and no `Hire` control.
 - Below `md`, `#home` has no name eyebrow. Identity on small screens is the header wordmark plus the role-line heading.
+- The wordmark `Alex Bramall` is a `Link` to `/`. A click while already on `/` does not scroll to `#home`. After a home-section scroll, use `browser goto` (or `scrollIntoView` on `#home`) before a near-top wait.

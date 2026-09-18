@@ -875,8 +875,9 @@ async function cmdSnapshot(flags) {
 }
 
 async function cmdScreenshot(flags) {
-  await withPage(async (cdp) => {
+  await withPage(async (cdp, state) => {
     const fullPage = Boolean(flags['full-page']);
+    const previous = state.chrome?.viewport || { width: 1280, height: 800, mobile: false };
     if (fullPage) {
       const metrics = await evaluate(
         cdp,
@@ -891,6 +892,9 @@ async function cmdScreenshot(flags) {
     });
     const outPath = resolveEvidencePath(flags.path, 'screenshot.png');
     fs.writeFileSync(outPath, Buffer.from(shot.data, 'base64'));
+    if (fullPage) {
+      await setViewport(cdp, previous.width, previous.height, previous.mobile);
+    }
     process.stdout.write(`Wrote ${outPath}\n`);
   });
 }

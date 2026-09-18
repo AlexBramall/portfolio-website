@@ -16,7 +16,7 @@ This directory is the maintained source for verifying the user-facing behavior o
 - Prefer role + accessible name over CSS. Hero `Work` is the documented exception when nav `Work` would match first — use `#home a` whose name is `Work`, or `a[href$="/work"]` inside `#home`.
 - Treat every command as literal. Keep quoted names and flags unchanged.
 - After clicks that change route or hash, wait until the target landmark is aligned near the top (or the page is at max scroll) and `scrollY` is stable. Default `wait-for --selector` uses that near-top rule. Below-fold sections need `eval` `scrollIntoView` then `wait-for --selector "#<id>" --in-view` (same geometry as snapshot `[in-view]`).
-- Restore viewport 1280×800 after a mobile recipe. Do not remove proof artifacts during cleanup.
+- Restore viewport 1280×800 after a mobile recipe. Full-page screenshots enlarge the viewport for the capture, then restore the previous size. Do not remove proof artifacts during cleanup.
 
 ## Proof and skip reporting
 
