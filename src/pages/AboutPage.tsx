@@ -3,6 +3,7 @@ import { copy } from '../data/copy';
 import { buttonClassName } from '../lib/buttonStyles';
 import { stackChipClassName } from '../lib/chipStyles';
 import { ChapterTile } from '../components/about/ChapterTile';
+import { PageCtaStrip } from '../components/sections/PageCtaStrip';
 import { ResumeLink } from '../components/ui/ResumeLink';
 import { Section } from '../components/layout/Section';
 
@@ -42,17 +43,7 @@ export const AboutPage = () => {
         </div>
       </Section>
 
-      <Section id="about-cta" tone="muted">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-h3 text-text">Get in touch</h2>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link to="/contact" className={buttonClassName('primary')}>
-              Contact
-            </Link>
-            <ResumeLink className={buttonClassName('secondary')} />
-          </div>
-        </div>
-      </Section>
+      <PageCtaStrip id="about-cta" />
     </>
   );
 };

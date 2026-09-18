@@ -82,7 +82,7 @@ Stable handles from this repo (prefer these over CSS/coordinates):
 | Footer | `link` named `Email`, `LinkedIn`, `GitHub` |
 | Contact mailto | `link` named `Email` |
 | Home sections | `#home` `#selected-work` `#how-i-work` `#stack` `#contact-strip` |
-| Routes | `#work` `#about` `#contact` plus `/work/:slug` case template |
+| Routes | `#work` `#work-grid` `#work-cta` `#about` `#contact` plus `/work/:slug` case template |
 
 Smooth in-page scroll is async. After a hash jump, `wait-for --selector "#<id>"` until that section is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. After a **route** click, wait-for the destination landmark the same way (`#work`, `#about`, `#contact`, or the case `h1`). Snapshots mark `[in-view]` on nodes that currently intersect the viewport — use that, not mere presence, as proof.
 
