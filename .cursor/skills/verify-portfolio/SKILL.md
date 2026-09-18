@@ -74,7 +74,8 @@ Stable handles from this repo (prefer these over CSS/coordinates):
 | User control | Handle |
 | --- | --- |
 | Wordmark | `link` named `Alex Bramall` (home) |
-| Desktop / mobile nav | `link` named `Work`, `About`, `Contact` |
+| Desktop / mobile nav | `link` named `Work`, `About`, `Resume`, `Contact` |
+| Nav Resume | `link` named `Resume` (PDF from `resume.url`, new tab; do not click to prove it) |
 | Nav / hero primary CTA | `link` named `Contact` (goes to `/contact`) |
 | Hero secondary CTA | `#home a` whose accessible name is `Work` (goes to `/work`) |
 | Selected-work cards | `link` whose `href` contains `/work/<slug>` |

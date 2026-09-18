@@ -34,7 +34,7 @@ Preconditions:
 
 ## Gotchas
 
-- Hero `Contact` and `Work` are **links**, not buttons. Nav also exposes `Work`, `About`, and `Contact`. Using `--role link --name "Work"` or `--role link --name "Contact"` from home may hit the header first; use `#home a[href$='/work']` or `#home a[href$='/contact']` for the hero path.
+- Hero `Contact` and `Work` are **links**, not buttons. Nav also exposes `Work`, `About`, `Resume`, and `Contact`. Using `--role link --name "Work"` or `--role link --name "Contact"` from home may hit the header first; use `#home a[href$='/work']` or `#home a[href$='/contact']` for the hero path.
 - Proof chips with empty values are omitted. Do not fail the run if `#proof` is missing.
 - Hero heading: `AI-Native Program & Product Leader`. Value prop: `I lead AI-native program and product delivery…`. Availability: `[placeholder: hero.availability]`.
 - There is no `#hire` landmark and no `Hire` control.
