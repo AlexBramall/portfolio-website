@@ -18,6 +18,9 @@ export const copy = {
   ai: {
     honesty: placeholder('ai.honesty'),
   },
+  work: {
+    indexIntro: placeholder('work.index.intro'),
+  },
   about: {
     arc: placeholder('about.arc'),
     chapters: [
