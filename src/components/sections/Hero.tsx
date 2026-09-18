@@ -6,7 +6,9 @@ import { Section } from '../layout/Section';
 export const Hero = () => {
   return (
     <Section id="home" tone="hero" className="pt-20 md:pt-24">
-      <p className="mb-4 text-caption uppercase tracking-wide text-text-muted">Alex Bramall</p>
+      <p className="mb-4 hidden text-caption uppercase tracking-wide text-text-muted md:block">
+        Alex Bramall
+      </p>
       <h1 className="max-w-3xl text-display text-text">{copy.hero.roleLine}</h1>
       <p className="mt-6 max-w-2xl text-body text-text-secondary">{copy.hero.valueProp}</p>
       <p className="mt-6 inline-flex rounded-pill border border-border bg-accent-subtle px-3 py-1.5 text-caption text-accent">
