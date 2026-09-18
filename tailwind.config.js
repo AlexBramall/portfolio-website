@@ -17,6 +17,14 @@ export default {
           hover: 'var(--accent-hover)',
           subtle: 'var(--accent-subtle)',
         },
+        'accent-2': {
+          DEFAULT: 'var(--accent-2)',
+          subtle: 'var(--accent-2-subtle)',
+        },
+        'accent-3': {
+          DEFAULT: 'var(--accent-3)',
+          subtle: 'var(--accent-3-subtle)',
+        },
         success: 'var(--success)',
         danger: 'var(--danger)',
       },
@@ -32,25 +40,25 @@ export default {
       },
       fontSize: {
         display: [
-          'clamp(40px, 6vw, 64px)',
+          'clamp(44px, 7vw, 72px)',
           { lineHeight: '1.05', letterSpacing: '-0.03em', fontWeight: '650' },
         ],
         h2: [
-          'clamp(28px, 3vw, 32px)',
-          { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '600' },
+          'clamp(28px, 3vw, 34px)',
+          { lineHeight: '1.15', letterSpacing: '-0.02em', fontWeight: '600' },
         ],
         h3: ['clamp(20px, 2vw, 22px)', { lineHeight: '1.3', fontWeight: '600' }],
-        body: ['17px', { lineHeight: '1.6', fontWeight: '400' }],
-        label: ['15px', { lineHeight: '1.4', fontWeight: '500' }],
+        body: ['17px', { lineHeight: '1.5', fontWeight: '400' }],
+        label: ['14px', { lineHeight: '1.4', fontWeight: '600' }],
         caption: ['13px', { lineHeight: '1.4', fontWeight: '500' }],
       },
       borderRadius: {
-        control: '10px',
-        card: '14px',
+        control: '12px',
+        card: '20px',
         pill: '999px',
       },
       boxShadow: {
-        card: '0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06)',
+        card: '0 2px 8px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.06)',
       },
       maxWidth: {
         content: '64rem',

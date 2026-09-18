@@ -25,7 +25,7 @@ Preconditions:
 - Viewport is 1280×800.
 
 - **Nav entry.** Choose `Contact`. Run `control-portfolio browser goto` then `control-portfolio browser click --role link --name "Contact"` then `control-portfolio browser wait-for --selector "#contact"`. Heading `Contact` is in view.
-- **Hero entry.** Return home and use the hero Contact control. Run `control-portfolio browser click --role link --name "Alex Bramall"`, `control-portfolio browser wait-for --selector "#home"`, `control-portfolio browser click --selector "#home a[href$='/contact']"`, `control-portfolio browser wait-for --selector "#contact"`. The same heading is in view. The primary CTA is accent (sky), not green.
+- **Hero entry.** Return home and use the hero Contact control. Run `control-portfolio browser click --role link --name "Alex Bramall"`, `control-portfolio browser wait-for --selector "#home"`, `control-portfolio browser click --selector "#home a[href$='/contact']"`, `control-portfolio browser wait-for --selector "#contact"`. The same heading is in view. The primary CTA is filled blue, not green.
 - **Placeholders.** Run `control-portfolio browser contains --text "[placeholder: contact.intro]"` and `control-portfolio browser contains --text "[placeholder: contact.channels]"`.
 - **Mailto.** Confirm the page CTA. Run `control-portfolio browser snapshot --aria --path artifacts/contact/page.aria.txt`. The snapshot includes `link "Email" href=mailto:alex.Bramall@email.com`. Do not activate the link.
 - **Footer.** Confirm identity links. The snapshot includes `link "Email" href=mailto:alex.Bramall@email.com`, `link "LinkedIn" href=https://linkedin.com/in/alexBramall`, and `link "GitHub" href=https://github.com/alexBramall`. Do not follow them.

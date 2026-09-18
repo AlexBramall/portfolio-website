@@ -9,7 +9,7 @@ export const CasePage = () => {
 
   if (!workCase) {
     return (
-      <div className="mx-auto max-w-prose px-6 py-24 md:px-10 lg:px-20">
+      <div className="mx-auto max-w-prose px-5 py-24 md:px-8 lg:px-16">
         <h1 className="text-display text-text">Case not found</h1>
         <p className="mt-4 text-body text-text-secondary">
           That work slug is not in this build.
@@ -22,7 +22,7 @@ export const CasePage = () => {
   }
 
   return (
-    <div className="px-6 py-16 md:px-10 md:py-20 lg:px-20 lg:py-24">
+    <div className="px-5 py-16 md:px-8 md:py-20 lg:px-16 lg:py-24">
       <div className="mx-auto max-w-5xl">
         <Link to="/work" className="text-label text-accent hover:text-accent-hover">
           ← Work
