@@ -143,6 +143,14 @@
     color: #000 !important;
   }
 
+  body:has(#resume) .min-h-screen {
+    min-height: 0 !important;
+  }
+
+  body:has(#resume) main {
+    flex: none !important;
+  }
+
   body:has(#resume) nav,
   body:has(#resume) footer {
     display: none !important;
