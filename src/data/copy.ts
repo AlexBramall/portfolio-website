@@ -59,7 +59,7 @@ export const copy = {
         weight: 'featured',
         roles: [
           { title: 'Head of Operations & Delivery', dates: 'Jul 2024 – Present' },
-          { title: 'Director of Operations & Delivery', dates: 'Aug 2023 – Jul 2024' },
+          { title: 'Director of Operations & Delivery', dates: 'Aug 2023 – Jun 2024' },
           { title: 'Senior Program Manager', dates: 'May 2022 – Aug 2023' },
         ],
       },
