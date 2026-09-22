@@ -1,4 +1,4 @@
-import { AboutChapter } from '../types';
+import { AboutChapter, ResumeContent } from '../types';
 import { placeholder } from '../lib/placeholder';
 
 export const copy = {
@@ -50,8 +50,67 @@ export const copy = {
     ],
   },
   resume: {
-    url: 'https://example.com/alex-bramall-resume.pdf',
-  },
+    location: 'Austin, Texas',
+    employers: [
+      {
+        id: 'form-factory',
+        name: 'Form Factory',
+        kind: 'Agency',
+        weight: 'featured',
+        roles: [
+          { title: 'Head of Operations & Delivery', dates: 'Jul 2024 – Present' },
+          { title: 'Director of Operations & Delivery', dates: 'Aug 2023 – Jul 2024' },
+          { title: 'Senior Program Manager', dates: 'May 2022 – Aug 2023' },
+        ],
+      },
+      {
+        id: 'nomad',
+        name: 'Nomad',
+        kind: 'Brand',
+        weight: 'featured',
+        roles: [
+          { title: 'Director of E-commerce & Digital Product', dates: 'Mar 2022 – Sep 2022' },
+          { title: 'Ecommerce Manager', dates: 'Oct 2021 – Mar 2022' },
+          { title: 'Technical Project Manager', dates: 'Oct 2020 – Oct 2021' },
+        ],
+      },
+      {
+        id: 'gilleard',
+        name: 'Gilleard Dental Marketing',
+        kind: 'Agency',
+        weight: 'quiet',
+        roles: [
+          { title: 'Digital Project / Product Manager', dates: 'Jun 2018 – Oct 2020' },
+          { title: 'Project Coordinator', dates: 'Jan 2018 – Jun 2018' },
+        ],
+      },
+      {
+        id: 'cybercoders',
+        name: 'CyberCoders',
+        kind: 'Recruiting',
+        weight: 'quiet',
+        roles: [{ title: 'Technical Recruiter', dates: 'May 2017 – Dec 2017' }],
+      },
+      {
+        id: 'uncommon-threads',
+        name: 'Uncommon Threads',
+        weight: 'quiet',
+        roles: [{ title: 'Co-Founder', dates: 'Jul 2015 – Apr 2017' }],
+      },
+    ],
+    education: {
+      school: 'Wake Forest University',
+      credential: 'Bachelor of Arts, Communication',
+    },
+    skills: [
+      'Program management',
+      'Product',
+      'Ecommerce',
+      'Shopify',
+      'Cross-functional delivery',
+      'AI-native operations',
+    ],
+  } satisfies ResumeContent as ResumeContent,
   contact: {
     intro: placeholder('contact.intro'),
     channels: placeholder('contact.channels'),

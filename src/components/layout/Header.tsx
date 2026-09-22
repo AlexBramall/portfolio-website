@@ -1,26 +1,17 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
-import { ResumeLink } from '../ui/ResumeLink';
 
-type RouteNavItem = {
-  kind: 'route';
-  to: '/work' | '/about' | '/contact';
-  label: 'Work' | 'About' | 'Contact';
+type NavItem = {
+  to: '/work' | '/about' | '/resume' | '/contact';
+  label: 'Work' | 'About' | 'Resume' | 'Contact';
 };
-
-type ExternalNavItem = {
-  kind: 'external';
-  label: 'Resume';
-};
-
-type NavItem = RouteNavItem | ExternalNavItem;
 
 const navItems: readonly NavItem[] = [
-  { kind: 'route', to: '/work', label: 'Work' },
-  { kind: 'route', to: '/about', label: 'About' },
-  { kind: 'external', label: 'Resume' },
-  { kind: 'route', to: '/contact', label: 'Contact' },
+  { to: '/work', label: 'Work' },
+  { to: '/about', label: 'About' },
+  { to: '/resume', label: 'Resume' },
+  { to: '/contact', label: 'Contact' },
 ];
 
 function navLinkClassName(isActive: boolean, compact: boolean): string {
@@ -44,24 +35,15 @@ function NavItemControl({
   compact: boolean;
   onNavigate?: () => void;
 }) {
-  switch (item.kind) {
-    case 'route':
-      return (
-        <NavLink
-          to={item.to}
-          onClick={onNavigate}
-          className={({ isActive }) => navLinkClassName(isActive, compact)}
-        >
-          {item.label}
-        </NavLink>
-      );
-    case 'external':
-      return <ResumeLink className={navLinkClassName(false, compact)} onClick={onNavigate} />;
-    default: {
-      const exhaustive: never = item;
-      throw new Error(`Unhandled nav item: ${JSON.stringify(exhaustive)}`);
-    }
-  }
+  return (
+    <NavLink
+      to={item.to}
+      onClick={onNavigate}
+      className={({ isActive }) => navLinkClassName(isActive, compact)}
+    >
+      {item.label}
+    </NavLink>
+  );
 }
 
 export const Header = () => {
