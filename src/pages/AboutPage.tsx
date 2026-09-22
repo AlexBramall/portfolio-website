@@ -4,7 +4,6 @@ import { buttonClassName } from '../lib/buttonStyles';
 import { stackChipClassName } from '../lib/chipStyles';
 import { ChapterTile } from '../components/about/ChapterTile';
 import { PageCtaStrip } from '../components/sections/PageCtaStrip';
-import { ResumeLink } from '../components/ui/ResumeLink';
 import { Section } from '../components/layout/Section';
 
 export const AboutPage = () => {
@@ -17,7 +16,9 @@ export const AboutPage = () => {
           <Link to="/contact" className={buttonClassName('primary')}>
             Contact
           </Link>
-          <ResumeLink className={buttonClassName('secondary')} />
+          <Link to="/resume" className={buttonClassName('secondary')}>
+            Resume
+          </Link>
         </div>
       </Section>
 

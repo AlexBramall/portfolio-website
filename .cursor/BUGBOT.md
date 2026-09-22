@@ -1,6 +1,6 @@
 # Review checklist
 
-Personal portfolio: Vite + React 18 + TypeScript SPA on GitHub Pages (`base: '/portfolio-website/'` in `vite.config.ts`). Client routing is `react-router-dom` with that basename. No backend or auth. Routes: `/`, `/work`, `/work/:slug`, `/about`, `/contact`. Home order: Hero → Proof bar → Selected work → How I work / AI honesty → Compact stack → Contact strip + footer.
+Personal portfolio: Vite + React 18 + TypeScript SPA on GitHub Pages (`base: '/portfolio-website/'` in `vite.config.ts`). Client routing is `react-router-dom` with that basename. No backend or auth. Routes: `/`, `/work`, `/work/:slug`, `/about`, `/resume`, `/contact`. Home order: Hero → Proof bar → Selected work → How I work / AI honesty → Compact stack → Contact strip + footer.
 
 ## Deployment and secrets
 
@@ -11,7 +11,7 @@ Personal portfolio: Vite + React 18 + TypeScript SPA on GitHub Pages (`base: '/p
 
 ## Accessibility
 
-Interactive controls have accessible names (visible text, `aria-label`, or `aria-labelledby`). Footer icons are labeled Email / LinkedIn / GitHub. The mobile header control is named Open menu / Close menu. Nav lives in `src/components/layout/Header.tsx` (Work · About · Resume · Contact). Resume is a text link to the PDF (`target="_blank"` + `rel="noopener noreferrer"`), not a filled CTA.
+Interactive controls have accessible names (visible text, `aria-label`, or `aria-labelledby`). Footer icons are labeled Email / LinkedIn / GitHub. The mobile header control is named Open menu / Close menu. Nav lives in `src/components/layout/Header.tsx` (Work · About · Resume · Contact). Resume is an in-app text link to `/resume` with the same active pill as the other routes, not a filled CTA. A Download PDF control renders only when `resume.pdfUrl` is set.
 
 ## Content and design
 

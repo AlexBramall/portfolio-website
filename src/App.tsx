@@ -8,6 +8,7 @@ import { HomePage } from './pages/HomePage';
 import { WorkPage } from './pages/WorkPage';
 import { CasePage } from './pages/CasePage';
 import { AboutPage } from './pages/AboutPage';
+import { ResumePage } from './pages/ResumePage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
@@ -29,6 +30,7 @@ const AppContent = Sentry.withProfiler(() => {
           <Route path="/work" element={<WorkPage />} />
           <Route path="/work/:slug" element={<CasePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/resume" element={<ResumePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/hire" element={<Navigate to="/contact" replace />} />
           <Route path="*" element={<NotFoundPage />} />

@@ -5,7 +5,7 @@ description: Drive the Alex Bramall Vite+React+TS+Tailwind portfolio website in 
 
 # Verify portfolio website
 
-This repo is a **Vite + React + TypeScript + Tailwind** portfolio with **client routing** (`react-router-dom`) and GitHub Pages `base` `/portfolio-website/`. Routes: `/`, `/work`, `/work/:slug`, `/about`, `/contact`. There is no in-repo Playwright/Cypress harness. Drive the **production preview** (same `base` as GitHub Pages) through the Chrome CDP helper this skill ships.
+This repo is a **Vite + React + TypeScript + Tailwind** portfolio with **client routing** (`react-router-dom`) and GitHub Pages `base` `/portfolio-website/`. Routes: `/`, `/work`, `/work/:slug`, `/about`, `/resume`, `/contact`. There is no in-repo Playwright/Cypress harness. Drive the **production preview** (same `base` as GitHub Pages) through the Chrome CDP helper this skill ships.
 
 Read `features/README.md` before proving a change. Drive the mapped feature that matches the user-visible area you touched, not a convenient neighbor.
 
@@ -77,16 +77,16 @@ Stable handles from this repo (prefer these over CSS/coordinates):
 | --- | --- |
 | Wordmark | `link` named `Alex Bramall` (home) |
 | Desktop / mobile nav | `link` named `Work`, `About`, `Resume`, `Contact` |
-| Nav Resume | `link` named `Resume` (PDF from `resume.url`, new tab; do not click to prove it) |
+| Nav Resume | `link` named `Resume` (in-app `/resume`; active pill on that route) |
 | Nav / hero primary CTA | `link` named `Contact` (goes to `/contact`) |
 | Hero secondary CTA | `#home a` whose accessible name is `Work` (goes to `/work`) |
 | Selected-work cards | `link` whose `href` contains `/work/<slug>` |
 | Footer | `link` named `Email`, `LinkedIn`, `GitHub` |
 | Contact mailto | `link` named `Email` |
 | Home sections | `#home` `#selected-work` `#how-i-work` `#stack` `#contact-strip` |
-| Routes | `#work` `#work-grid` `#work-cta` `#about` `#contact` plus `/work/:slug` case template |
+| Routes | `#work` `#work-grid` `#work-cta` `#about` `#resume` `#contact` plus `/work/:slug` case template |
 
-Smooth in-page scroll is async. After a hash jump or **route** click, `wait-for --selector "#<id>"` until that landmark is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. Landmarks: `#work`, `#about`, `#contact`, or the case `h1`. Below-fold sections (`#work-grid`, `#work-cta`, `#selected-work`, `#contact-strip`) are often already intersecting after a route land, but default wait-for still requires near-top alignment. Scroll them into view, then `wait-for --selector "#<id>" --in-view` — that flag uses the same geometry as snapshot `[in-view]` (intersects the viewport), not mere presence and not near-top.
+Smooth in-page scroll is async. After a hash jump or **route** click, `wait-for --selector "#<id>"` until that landmark is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. Landmarks: `#work`, `#about`, `#resume`, `#contact`, or the case `h1`. Below-fold sections (`#work-grid`, `#work-cta`, `#selected-work`, `#contact-strip`, `#resume-experience`) are often already intersecting after a route land, but default wait-for still requires near-top alignment. Scroll them into view, then `wait-for --selector "#<id>" --in-view` — that flag uses the same geometry as snapshot `[in-view]` (intersects the viewport), not mere presence and not near-top.
 
 ## Evidence
 

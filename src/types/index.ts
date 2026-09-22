@@ -48,6 +48,36 @@ export interface StackChip {
   label: string;
 }
 
+export type ResumeEmployerKind = 'Agency' | 'Brand' | 'Recruiting';
+
+export type ResumeEmployerWeight = 'featured' | 'quiet';
+
+export interface ResumeRole {
+  title: string;
+  dates: string;
+}
+
+export interface ResumeEmployer {
+  id: string;
+  name: string;
+  kind?: ResumeEmployerKind;
+  weight: ResumeEmployerWeight;
+  roles: readonly ResumeRole[];
+}
+
+export interface ResumeEducation {
+  school: string;
+  credential: string;
+}
+
+export interface ResumeContent {
+  pdfUrl?: string;
+  location: string;
+  employers: readonly ResumeEmployer[];
+  education: ResumeEducation;
+  skills: readonly string[];
+}
+
 export type AboutChapterId = 'form-factory' | 'nomad' | 'gilleard';
 
 export interface AboutChapter {
