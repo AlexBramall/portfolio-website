@@ -42,6 +42,6 @@ Keep implementation details out of the map. Name only user paths, stable handles
 - [Home / hero](./home.md) covers identity, the locked role line and value prop, and the Contact / Work CTAs.
 - [Navigation](./nav.md) covers desktop route links, the Resume PDF link, and the mobile menu.
 - [Work](./work.md) covers the selected-work grid and the `/work` index (hero, 2-column cards, quiet Contact + Resume strip).
-- [Case](./case.md) covers the sample case template and result badge.
+- [Case](./case.md) covers `/work/elf-shopify-migration` and the result badge.
 - [About](./about.md) covers `/about`: arc, Contact / Resume CTAs, employer chapters, and the quiet footer strip.
 - [Contact](./contact.md) covers `/contact`, the home contact strip, and footer identity links.
