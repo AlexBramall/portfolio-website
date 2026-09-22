@@ -59,6 +59,7 @@ export default {
       },
       boxShadow: {
         card: '0 2px 8px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.06)',
+        paper: 'var(--shadow-paper)',
       },
       maxWidth: {
         content: '64rem',

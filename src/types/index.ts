@@ -72,7 +72,9 @@ export interface ResumeEducation {
 
 export interface ResumeContent {
   pdfUrl?: string;
+  name: string;
   location: string;
+  linkedinHref: string;
   employers: readonly ResumeEmployer[];
   education: ResumeEducation;
   skills: readonly string[];
