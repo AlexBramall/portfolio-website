@@ -1,15 +1,15 @@
 # Work
 
-Selected work is a three-card grid on home (not a carousel). `/work` is the Work index: a page hero, the same Work cards in a 2-column grid, and a quiet Contact + Resume strip. Cards stay labeled placeholders until real cases land. There is no filter chrome.
+Selected work is a three-card grid on home (not a carousel). `/work` is the Work index: a page hero, the same Work cards in a 2-column grid, and a quiet Contact + Resume strip. The first card is the e.l.f. Cosmetics Shopify migration; the other cards stay labeled placeholders. There is no filter chrome.
 
 ## Sub-features
 
-- `work-home-grid` shows three case cards under `Selected work`, each with eyebrow · title · outcome · tags.
+- `work-home-grid` shows three case cards under `Selected work`, each with eyebrow · title · outcome · tags. The first card is the e.l.f. case.
 - `work-index` opens `/work` from nav `Work`, hero `Work`, or Selected work `All work`.
 - `work-index-hero` shows heading `Work`, `[placeholder: work.index.intro]`, and a secondary text `Contact` link to `/contact`.
-- `work-index-grid` shows the same placeholder cards in a 2-column grid from `md` up (1 column on mobile). There are no filter chips.
+- `work-index-grid` shows the same cards in a 2-column grid from `md` up (1 column on mobile). The first card is the e.l.f. case; the other two stay labeled placeholders. There are no filter chips.
 - `work-index-cta` repeats Contact and Resume in the page footer strip.
-- `work-card-open` opens `/work/sample-case` from a card.
+- `work-card-open` opens `/work/elf-shopify-migration` from the e.l.f. card.
 
 ## How to get to it (user POV)
 
@@ -30,10 +30,10 @@ Preconditions:
 - **Index.** Choose header `Work`. Run `control-portfolio browser click --role link --name "Work"` then `control-portfolio browser wait-for --selector "#work"`. Path ends with `/work`. Heading `Work` is in view.
 - **Intro.** Confirm the labeled support line. Run `control-portfolio browser contains --text "[placeholder: work.index.intro]"`.
 - **Hero Contact.** Confirm the secondary text link. Run `control-portfolio browser snapshot --aria --path artifacts/work/hero.aria.txt`. `#work` includes `link "Contact"` to `/contact`. It is a text link, not a filled primary button. Prefer `#work a[href$='/contact']` when the header would match first.
-- **Grid.** Bring the cards into view. Run `control-portfolio browser eval --expr "document.getElementById('work-grid').scrollIntoView({block:'start'})"` then `control-portfolio browser wait-for --selector "#work-grid" --in-view`. Cards show `[placeholder: work.card.1.title]`, `[placeholder: work.card.2.title]`, and `[placeholder: work.card.3.title]` with labeled eyebrows, outcomes, and tags. There is no filter chip row.
+- **Grid.** Bring the cards into view. Run `control-portfolio browser eval --expr "document.getElementById('work-grid').scrollIntoView({block:'start'})"` then `control-portfolio browser wait-for --selector "#work-grid" --in-view`. Cards show `Salesforce Commerce Cloud → Shopify`, `[placeholder: work.card.2.title]`, and `[placeholder: work.card.3.title]` with labeled eyebrows, outcomes, and tags. There is no filter chip row.
 - **Footer strip.** Run `control-portfolio browser eval --expr "document.getElementById('work-cta').scrollIntoView({block:'start'})"` then `control-portfolio browser wait-for --selector "#work-cta" --in-view`. The strip heading is `Get in touch` and it repeats `Contact` and `Resume`. Do not activate Resume; it opens a new tab.
-- **Open sample case.** Choose the sample card from the index. Run `control-portfolio browser goto --url "http://127.0.0.1:$VERIFY_PORT/portfolio-website/work"`, `control-portfolio browser wait-for --selector "#work"`, `control-portfolio browser eval --expr "document.getElementById('work-grid').scrollIntoView({block:'start'})"`, `control-portfolio browser wait-for --selector "#work-grid" --in-view`, `control-portfolio browser click --selector "a[href$='/work/sample-case']"`, then `control-portfolio browser wait-for --text "[placeholder: work.card.1.title]"`. Path ends with `/work/sample-case`.
-- **Proof.** Capture the work index. Run `control-portfolio browser goto --url "http://127.0.0.1:$VERIFY_PORT/portfolio-website/work"`, `control-portfolio browser wait-for --selector "#work"`, `control-portfolio browser eval --expr "document.getElementById('work-grid').scrollIntoView({block:'start'})"`, `control-portfolio browser wait-for --selector "#work-grid" --in-view`, `control-portfolio browser snapshot --aria --path artifacts/work/index.aria.txt`, and `control-portfolio browser screenshot --full-page --path artifacts/work/index.png`. Artifacts show heading `Work`, the intro placeholder, a text Contact link, and the labeled placeholder cards. There is no filter row.
+- **Open e.l.f. case.** Choose the e.l.f. card from the index. Run `control-portfolio browser goto --url "http://127.0.0.1:$VERIFY_PORT/portfolio-website/work"`, `control-portfolio browser wait-for --selector "#work"`, `control-portfolio browser eval --expr "document.getElementById('work-grid').scrollIntoView({block:'start'})"`, `control-portfolio browser wait-for --selector "#work-grid" --in-view`, `control-portfolio browser click --selector "a[href$='/work/elf-shopify-migration']"`, then `control-portfolio browser wait-for --text "Salesforce Commerce Cloud → Shopify"`. Path ends with `/work/elf-shopify-migration`.
+- **Proof.** Capture the work index. Run `control-portfolio browser goto --url "http://127.0.0.1:$VERIFY_PORT/portfolio-website/work"`, `control-portfolio browser wait-for --selector "#work"`, `control-portfolio browser eval --expr "document.getElementById('work-grid').scrollIntoView({block:'start'})"`, `control-portfolio browser wait-for --selector "#work-grid" --in-view`, `control-portfolio browser snapshot --aria --path artifacts/work/index.aria.txt`, and `control-portfolio browser screenshot --full-page --path artifacts/work/index.png`. Artifacts show heading `Work`, the intro placeholder, a text Contact link, the e.l.f. case card, and the remaining labeled placeholder cards. There is no filter row.
 
 ## Gotchas
 
