@@ -4,7 +4,7 @@
  * Launch, doctor, drive (Chrome CDP), and clean up an isolated instance.
  * Evidence files are never deleted by cleanup.
  */
-import { spawn, execSync } from 'node:child_process';
+import { spawn, spawnSync, execSync } from 'node:child_process';
 import fs from 'node:fs';
 import http from 'node:http';
 import os from 'node:os';
@@ -123,12 +123,58 @@ function isAlive(pid) {
   }
 }
 
-function cmdlineOf(pid) {
-  try {
-    return fs.readFileSync(`/proc/${pid}/cmdline`, 'utf8').replace(/\0/g, ' ').trim();
-  } catch {
-    return '';
+function cmdlineFromPs(pid) {
+  const numeric = Number(pid);
+  if (!Number.isInteger(numeric) || numeric <= 0) return '';
+  for (const format of ['command=', 'args=']) {
+    const result = spawnSync('ps', ['-ww', '-p', String(numeric), '-o', format], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+    if (result.status !== 0) continue;
+    const text = String(result.stdout || '').trim();
+    if (text) return text;
   }
+  return '';
+}
+
+function cmdlineOf(pid) {
+  // Linux exposes /proc/<pid>/cmdline. macOS does not; ask ps when it is absent.
+  const procPath = `/proc/${pid}/cmdline`;
+  if (fs.existsSync(procPath)) {
+    try {
+      const text = fs.readFileSync(procPath, 'utf8').replace(/\0/g, ' ').trim();
+      if (text) return text;
+    } catch {
+      // unreadable proc entry; fall through to ps
+    }
+  }
+  return cmdlineFromPs(pid);
+}
+
+function ensureGlobalWebSocket() {
+  if (typeof globalThis.WebSocket === 'function') return;
+
+  const [major, minor] = process.versions.node.split('.').map((part) => Number.parseInt(part, 10));
+  const flagSupported =
+    Number.isFinite(major) && Number.isFinite(minor) && (major > 20 || (major === 20 && minor >= 10));
+  if (process.env.VERIFY_WS_REEXEC === '1' || !flagSupported) {
+    process.stderr.write(
+      `Global WebSocket is unavailable on Node ${process.versions.node}. Chrome CDP needs Node 22+ (built in) or Node 20.10+ / 21 with --experimental-websocket.\n`,
+    );
+    process.exit(1);
+  }
+
+  const script = fileURLToPath(import.meta.url);
+  const execArgv = process.execArgv.filter((arg) => arg !== '--no-experimental-websocket');
+  if (!execArgv.includes('--experimental-websocket')) {
+    execArgv.unshift('--experimental-websocket');
+  }
+  const child = spawnSync(process.execPath, [...execArgv, script, ...process.argv.slice(2)], {
+    stdio: 'inherit',
+    env: { ...process.env, VERIFY_WS_REEXEC: '1' },
+  });
+  process.exit(child.status === null ? 1 : child.status);
 }
 
 function resolveChrome() {
@@ -515,7 +561,7 @@ async function inspectInstance(state, { throwOnFail }) {
   add(
     'pid-is-vite',
     /vite/.test(cmd),
-    cmd || 'could not read /proc cmdline',
+    cmd || 'could not read process command line',
   );
 
   let httpStatus = 0;
@@ -921,6 +967,7 @@ async function cmdEval(flags) {
 }
 
 async function main() {
+  ensureGlobalWebSocket();
   const flags = parseArgs(process.argv.slice(2));
   if (flags.help) usage(0);
   const [command, sub] = flags._;
