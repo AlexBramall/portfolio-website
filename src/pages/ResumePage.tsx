@@ -1,66 +1,89 @@
 import { Link } from 'react-router-dom';
+import { EmployerEntry } from '../components/resume/EmployerEntry';
 import { copy } from '../data/copy';
-import { buttonClassName } from '../lib/buttonStyles';
-import { stackChipClassName } from '../lib/chipStyles';
-import { EmployerTile } from '../components/resume/EmployerTile';
-import { PageCtaStrip } from '../components/sections/PageCtaStrip';
-import { Section } from '../components/layout/Section';
+
+const metaLinkClassName =
+  'text-accent underline-offset-2 hover:text-accent-hover hover:underline';
 
 export const ResumePage = () => {
   const pdfUrl = copy.resume.pdfUrl;
+  const { education, skills } = copy.resume;
 
   return (
-    <>
-      <Section id="resume" tone="hero" className="pt-20 md:pt-24">
-        <h1 className="text-display text-text">Resume</h1>
-        <p className="mt-6 max-w-2xl text-body text-text-secondary">{copy.hero.roleLine}</p>
-        <p className="mt-3 text-caption text-text-muted">{copy.resume.location}</p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Link to="/contact" className={buttonClassName('primary')}>
-            Contact
-          </Link>
-          {pdfUrl ? (
+    <div className="resume-canvas bg-bg px-3 py-8 sm:px-6 sm:py-10 md:py-12">
+      <article
+        id="resume"
+        className="resume-sheet mx-auto w-full max-w-[720px] rounded-sm border border-border bg-surface px-6 py-8 text-text shadow-paper sm:px-10 sm:py-10"
+      >
+        <header>
+          <h1 className="resume-name">{copy.resume.name}</h1>
+          <p className="resume-role mt-1 text-text-secondary">{copy.hero.roleLine}</p>
+          <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-caption text-text-secondary">
+            <span>{copy.resume.location}</span>
+            <span aria-hidden="true" className="text-text-muted">
+              ·
+            </span>
+            <Link to="/contact" className={metaLinkClassName}>
+              Contact
+            </Link>
+            <span aria-hidden="true" className="text-text-muted">
+              ·
+            </span>
             <a
-              href={pdfUrl}
-              className={buttonClassName('secondary')}
+              href={copy.resume.linkedinHref}
+              className={metaLinkClassName}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Download PDF
+              LinkedIn
             </a>
-          ) : null}
-        </div>
-      </Section>
+            {pdfUrl ? (
+              <>
+                <span aria-hidden="true" className="text-text-muted">
+                  ·
+                </span>
+                <a
+                  href={pdfUrl}
+                  className={metaLinkClassName}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download PDF
+                </a>
+              </>
+            ) : null}
+          </p>
+        </header>
 
-      <Section id="resume-experience">
-        <h2 className="text-h2 text-text">Experience</h2>
-        <div className="mt-8 flex flex-col gap-6">
-          {copy.resume.employers.map((employer) => (
-            <EmployerTile key={employer.id} employer={employer} />
-          ))}
-        </div>
-      </Section>
+        <section id="resume-experience" className="resume-block">
+          <h2 className="resume-section-label">Experience</h2>
+          <div className="mt-3 divide-y divide-border">
+            {copy.resume.employers.map((employer) => (
+              <EmployerEntry key={employer.id} employer={employer} />
+            ))}
+          </div>
+        </section>
 
-      <Section id="resume-education">
-        <h2 className="text-h2 text-text">Education</h2>
-        <article className="mt-8 rounded-card bg-surface-muted p-6 md:p-8">
-          <h3 className="text-h3 text-text">{copy.resume.education.school}</h3>
-          <p className="mt-2 text-body text-text-secondary">{copy.resume.education.credential}</p>
-        </article>
-      </Section>
+        <section id="resume-education" className="resume-block">
+          <h2 className="resume-section-label">Education</h2>
+          <p className="resume-quiet mt-2 text-text">
+            <span className="font-semibold">{education.school}</span>
+            <span className="text-text-muted"> · </span>
+            <span className="text-text-secondary">{education.credential}</span>
+          </p>
+        </section>
 
-      <Section id="resume-skills">
-        <h2 className="text-h2 text-text">Skills</h2>
-        <div className="mt-8 flex flex-wrap gap-2">
-          {copy.resume.skills.map((skill, index) => (
-            <span key={skill} className={stackChipClassName(index)}>
-              {skill}
-            </span>
-          ))}
-        </div>
-      </Section>
+        <section id="resume-skills" className="resume-block">
+          <h2 className="resume-section-label">Skills</h2>
+          <p className="resume-quiet mt-2 text-text-secondary">{skills.join(' · ')}</p>
+        </section>
 
-      <PageCtaStrip id="resume-cta" showResume={false} />
-    </>
+        <p id="resume-contact" className="resume-block text-caption text-text-secondary">
+          <Link to="/contact" className={metaLinkClassName}>
+            Contact
+          </Link>
+        </p>
+      </article>
+    </div>
   );
 };

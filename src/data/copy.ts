@@ -50,7 +50,9 @@ export const copy = {
     ],
   },
   resume: {
+    name: 'Alex Bramall',
     location: 'Austin, Texas',
+    linkedinHref: 'https://linkedin.com/in/alexBramall',
     employers: [
       {
         id: 'form-factory',

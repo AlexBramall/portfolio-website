@@ -86,7 +86,7 @@ Stable handles from this repo (prefer these over CSS/coordinates):
 | Home sections | `#home` `#selected-work` `#how-i-work` `#stack` `#contact-strip` |
 | Routes | `#work` `#work-grid` `#work-cta` `#about` `#resume` `#contact` plus `/work/:slug` case template |
 
-Smooth in-page scroll is async. After a hash jump or **route** click, `wait-for --selector "#<id>"` until that landmark is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. Landmarks: `#work`, `#about`, `#resume`, `#contact`, or the case `h1`. Below-fold sections (`#work-grid`, `#work-cta`, `#selected-work`, `#contact-strip`, `#resume-experience`) are often already intersecting after a route land, but default wait-for still requires near-top alignment. Scroll them into view, then `wait-for --selector "#<id>" --in-view` — that flag uses the same geometry as snapshot `[in-view]` (intersects the viewport), not mere presence and not near-top.
+Smooth in-page scroll is async. After a hash jump or **route** click, `wait-for --selector "#<id>"` until that landmark is aligned near the top of the viewport (or the page cannot scroll further); do not `sleep` a fixed number. Landmarks: `#work`, `#about`, `#resume`, `#contact`, or the case `h1`. Below-fold sections (`#work-grid`, `#work-cta`, `#selected-work`, `#contact-strip`, `#resume-experience`, `#resume-education`, `#resume-skills`, `#resume-contact`) are often already intersecting after a route land, but default wait-for still requires near-top alignment. Scroll them into view, then `wait-for --selector "#<id>" --in-view` — that flag uses the same geometry as snapshot `[in-view]` (intersects the viewport), not mere presence and not near-top.
 
 ## Evidence
 

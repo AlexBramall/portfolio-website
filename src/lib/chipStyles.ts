@@ -1,5 +1,3 @@
-import { ResumeEmployerKind } from '../types';
-
 const tagWashes = [
   'bg-accent-subtle text-accent',
   'bg-accent-subtle text-accent',
@@ -32,19 +30,4 @@ const chapterEyebrowWashes = [
 
 export function chapterEyebrowClassName(index: number): string {
   return `inline-flex rounded-pill px-3 py-1 text-caption ${chapterEyebrowWashes[index % chapterEyebrowWashes.length]}`;
-}
-
-export function employerKindClassName(kind: ResumeEmployerKind): string {
-  switch (kind) {
-    case 'Agency':
-      return 'inline-flex rounded-pill px-3 py-1 text-caption bg-accent-subtle text-accent';
-    case 'Brand':
-      return 'inline-flex rounded-pill px-3 py-1 text-caption bg-accent-2-subtle text-accent-2';
-    case 'Recruiting':
-      return 'inline-flex rounded-pill px-3 py-1 text-caption bg-accent-3-subtle text-accent-3';
-    default: {
-      const exhaustive: never = kind;
-      throw new Error(`Unhandled employer kind: ${exhaustive}`);
-    }
-  }
 }
