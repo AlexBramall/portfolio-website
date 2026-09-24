@@ -24,6 +24,7 @@ export VERIFY_PORT="${VERIFY_PORT:-4173}"
 - State: `/tmp/verify-portfolio/$VERIFY_RUN_ID/state.json`
 - Logs: `/tmp/verify-portfolio/$VERIFY_RUN_ID/vite.log`
 - Evidence: `/tmp/verify-portfolio/$VERIFY_RUN_ID/evidence/` (survives cleanup)
+- Chrome CDP needs a global `WebSocket`. Node 22+ includes it. On Node 20, start the helper with `node --experimental-websocket .cursor/skills/verify-portfolio/helpers/control-portfolio.mjs` (the flag exists since Node 20.10; Node 21 needs it too). If that global is missing, the helper re-runs itself with the flag, so the commands in this skill still work.
 
 Fast iteration (HMR, not what GitHub Pages serves):
 
@@ -117,10 +118,16 @@ Removes instance state, Vite/Chrome logs, and the Chrome user-data dir. **Leaves
 
 Executable: `.cursor/skills/verify-portfolio/helpers/control-portfolio.mjs`
 
-Requires Node 18+ (repo: 20/22) and a Chrome/Chromium binary (`google-chrome` on this cloud image; override with `CHROME_PATH`). No extra npm dependency — Playwright is not in this repo and must not be added for verification.
+Requires Node 20.10+ and a Chrome/Chromium binary (`google-chrome` on this cloud image; override with `CHROME_PATH`). Node 22+ includes the global `WebSocket` Chrome CDP uses. Node 20 (since 20.10) and Node 21 expose it only behind `--experimental-websocket`. When the global is missing, this helper re-runs itself as:
+
+```bash
+node --experimental-websocket .cursor/skills/verify-portfolio/helpers/control-portfolio.mjs
+```
+
+No extra npm dependency — Playwright is not in this repo and must not be added for verification.
 
 ```bash
 ./.cursor/skills/verify-portfolio/helpers/control-portfolio.mjs --help
 ```
 
-Keep the feature map honest when routes, labels, or home modules change.
+When routes, labels, or home modules change, use `/maintain-verification-skill` to keep this map honest.
