@@ -23,7 +23,7 @@ Preconditions:
 - **Open case.** From home, choose the e.l.f. card. Run `control-portfolio browser goto` then `control-portfolio browser click --selector "a[href$='/work/elf-shopify-migration']"` then `control-portfolio browser wait-for --text "Results"`. Path ends with `/work/elf-shopify-migration`.
 - **Read slots.** Confirm required headings without inventing copy. Run `control-portfolio browser contains --text "Context"`, then the same for `Role & scope`, `Constraints`, `Insights`, `Options rejected`, `Decisions`, `What shipped`, `AI tooling honesty`, `Results`, and `Learnings`.
 - **Badge.** Confirm the e.l.f. results kind. Run `control-portfolio browser contains --text "proxy"`. The title is `Salesforce Commerce Cloud → Shopify`. Empty result numbers are omitted.
-- **Proof.** Run `control-portfolio browser snapshot --aria --path artifacts/case/elf.aria.txt` and `control-portfolio browser screenshot --path artifacts/case/elf.png`. Artifacts show the case title and the Results badge.
+- **Proof.** Run `control-portfolio browser snapshot --aria --path artifacts/case/elf.aria.txt` and `control-portfolio browser screenshot --full-page --path artifacts/case/elf.png`. The full-page screenshot shows the case title and the Results badge. A viewport shot stops above Results. The snapshot lists the Results heading and omits the badge text.
 
 ## Gotchas
 
