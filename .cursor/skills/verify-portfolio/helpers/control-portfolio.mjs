@@ -425,9 +425,10 @@ async function connectPage(state) {
   await cdp.send('Page.enable');
   await cdp.send('Runtime.enable');
   await cdp.send('DOM.enable');
+  const viewport = state.chrome.viewport || { width: 1280, height: 800, mobile: false };
+  await setViewport(cdp, viewport.width, viewport.height, viewport.mobile);
   if (!state.chrome.viewport) {
-    await setViewport(cdp, 1280, 800, false);
-    state.chrome.viewport = { width: 1280, height: 800, mobile: false };
+    state.chrome.viewport = viewport;
     writeState(state);
   }
   return cdp;
